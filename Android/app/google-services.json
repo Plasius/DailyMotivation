@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:714464413444:android:0399a0131ae4a6c3a2f251",
+        "android_client_info": {
+          "package_name": "com.plasius.dailymotivationalquotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714464413444-b3p7o2llck2lkufovh3affn8u42ip20b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDuHcK13kxZmM78cgg5guOf4z-ESFzDrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714464413444-b3p7o2llck2lkufovh3affn8u42ip20b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:714464413444:android:15d5ed15597a5d92a2f251",
         "android_client_info": {
           "package_name": "com.plotberry.dailymotivation"

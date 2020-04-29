@@ -1,11 +1,8 @@
-package com.plotberry.dailymotivation.activities
+package com.plasius.dailymotivationalquotes.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
-import com.plotberry.dailymotivation.R
+import com.plasius.dailymotivationalquotes.R
 
 class HomeActivity : AppCompatActivity() {
 

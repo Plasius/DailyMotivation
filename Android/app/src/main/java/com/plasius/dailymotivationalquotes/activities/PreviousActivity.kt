@@ -1,8 +1,8 @@
-package com.plotberry.dailymotivation.activities
+package com.plasius.dailymotivationalquotes.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.plotberry.dailymotivation.R
+import com.plasius.dailymotivationalquotes.R
 
 class PreviousActivity : AppCompatActivity() {
 

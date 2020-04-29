@@ -1,4 +1,4 @@
-package com.plotberry.dailymotivation
+package com.plasius.dailymotivationalquotes
 
 import org.junit.Test
 

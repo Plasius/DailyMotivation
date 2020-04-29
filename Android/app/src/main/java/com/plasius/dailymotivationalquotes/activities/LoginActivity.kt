@@ -1,4 +1,4 @@
-package com.plotberry.dailymotivation.activities
+package com.plasius.dailymotivationalquotes.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.plotberry.dailymotivation.R
+import com.plasius.dailymotivationalquotes.R
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {

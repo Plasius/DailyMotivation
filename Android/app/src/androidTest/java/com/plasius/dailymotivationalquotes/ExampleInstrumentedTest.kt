@@ -1,4 +1,4 @@
-package com.plotberry.dailymotivation
+package com.plasius.dailymotivationalquotes
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

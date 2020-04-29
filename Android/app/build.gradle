@@ -8,11 +8,11 @@ android {
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.plotberry.dailymotivation"
+        applicationId "com.plasius.dailymotivationalquotes"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 10
+        versionName "Cordis Die"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
