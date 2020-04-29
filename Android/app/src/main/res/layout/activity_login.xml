@@ -36,6 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign up"
+            android:background="@color/orange_light"
+            android:layout_margin="10dp"
             android:onClick="trig_signuo"
             />
 
@@ -44,6 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign in"
+            android:background="@color/orange_light"
+            android:layout_margin="10dp"
             android:onClick="trig_signin"
             />
 
