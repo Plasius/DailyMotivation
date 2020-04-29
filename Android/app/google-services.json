@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "714464413444",
+    "firebase_url": "https://daily-motivation-fc6a8.firebaseio.com",
+    "project_id": "daily-motivation-fc6a8",
+    "storage_bucket": "daily-motivation-fc6a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714464413444:android:15d5ed15597a5d92a2f251",
+        "android_client_info": {
+          "package_name": "com.plotberry.dailymotivation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714464413444-b3p7o2llck2lkufovh3affn8u42ip20b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDuHcK13kxZmM78cgg5guOf4z-ESFzDrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714464413444-b3p7o2llck2lkufovh3affn8u42ip20b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
