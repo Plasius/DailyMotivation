@@ -30,8 +30,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun updateUI(currentUser: FirebaseUser?){
-        
-
+            if(currentUser != null){
+                var intent=Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+            }
     }
 
     /*
@@ -42,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
         updateUI(currentUser)
     }*/
 
-    fun trig_signuo(view: View) {
+    fun trig_signup(view: View) {
         var email = et_email.text.toString()
         var password = et_password.text.toString()
 
@@ -150,10 +152,6 @@ class LoginActivity : AppCompatActivity() {
                     updateUI(null)
                 }
             }
-    }
-
-    fun facebookSign(view: View){
-
     }
 
 }
