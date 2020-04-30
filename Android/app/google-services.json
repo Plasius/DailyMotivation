@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:714464413444:android:0399a0131ae4a6c3a2f251",
+        "mobilesdk_app_id": "1:714464413444:android:8c06ee4f60a49212a2f251",
         "android_client_info": {
           "package_name": "com.plasius.dailymotivationalquotes"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "714464413444-khr7lgcqmf0ka8d6p9m6065scenpv2ce.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plasius.dailymotivationalquotes",
+            "certificate_hash": "6ec999da04e07ed410d5226d2e51b5ac34391fb8"
+          }
+        },
         {
           "client_id": "714464413444-b3p7o2llck2lkufovh3affn8u42ip20b.apps.googleusercontent.com",
           "client_type": 3
