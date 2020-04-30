@@ -30,13 +30,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun updateUI(currentUser: FirebaseUser?){
-        authText.text = ""
-        if(currentUser==null){
-            authText.text = "You have not logged in or there was an error!"
-        }
-        else{
-            authText.text = "You have logged in as: ${currentUser.email}"
-        }
+        
 
     }
 
