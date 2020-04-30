@@ -6,19 +6,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.facebook.AccessToken
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.FirebaseUserMetadata
+import com.google.firebase.auth.GoogleAuthProvider
 import com.plasius.dailymotivationalquotes.R
 import kotlinx.android.synthetic.main.activity_login.*
+
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -28,7 +27,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
-
     }
 
     fun updateUI(currentUser: FirebaseUser?){
@@ -160,14 +158,8 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    fun facebookSign(view: View) {
-        /*Why are we still here just to suffer?
-           Every night, I can feel my leg... and my arm... even my fingers.
-            The body I've lost... the comrades I've lost... won't stop hurting...
-            It's like they're all still there.
-         */
+    fun facebookSign(view: View){
 
     }
-
 
 }
