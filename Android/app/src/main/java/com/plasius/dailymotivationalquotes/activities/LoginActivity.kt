@@ -49,6 +49,8 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
+
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -137,6 +139,25 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(baseContext, "Firebase failed.", Toast.LENGTH_SHORT).show()
                     updateUI(null)
+                }
+            }
+    }
+
+    fun resPass(view: View) {
+        var emailAddress = et_email.text.toString()
+
+        if(emailAddress == ""){
+            updateUI(null)
+            return
+        }
+
+        auth.sendPasswordResetEmail(emailAddress)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(baseContext, getString(R.string.mail_sent), Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    Toast.makeText(baseContext, "Error", Toast.LENGTH_SHORT).show()
                 }
             }
     }

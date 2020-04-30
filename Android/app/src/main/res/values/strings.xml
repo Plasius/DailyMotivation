@@ -10,5 +10,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="or">Or</string>
-    
+    <string name="fpass">Forgot password</string>
+    <string name="mail_sent">Email sent</string>
+    <string name="log_out">Sign out</string>
 </resources>

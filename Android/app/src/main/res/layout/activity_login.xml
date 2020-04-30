@@ -31,6 +31,15 @@
         android:hint="@string/prompt_password"
         android:inputType="textPassword" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:text="@string/fpass"
+        android:onClick="resPass"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,11 +52,11 @@
             android:id="@+id/su_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/action_sign_up"
-            android:background="@color/orange_light"
             android:layout_margin="10dp"
+            android:background="@color/orange_light"
+            android:backgroundTintMode="add"
             android:onClick="trig_signup"
-            />
+            android:text="@string/action_sign_up" />
 
         <Button
             android:id="@+id/si_button"

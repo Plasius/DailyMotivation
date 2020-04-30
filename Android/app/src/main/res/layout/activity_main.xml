@@ -17,9 +17,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@color/orange_light"
         android:padding="15dp"
         android:textColor="@color/black"
-        android:text="This is a test button"/>
+        android:onClick="signOut"
+        android:text="@string/log_out"/>
 
 </LinearLayout>
