@@ -19,8 +19,16 @@
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Hint"
+        android:hint="Password"
         android:inputType="textPassword"
+        />
+
+    <TextView
+        android:id="@+id/authText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
         />
 
     <LinearLayout
@@ -49,6 +57,38 @@
             android:background="@color/orange_light"
             android:layout_margin="10dp"
             android:onClick="trig_signin"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
+        android:layout_gravity="center"
+        >
+
+        <Button
+            android:id="@+id/buttonG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Google"
+            android:background="@color/orange_light"
+            android:layout_margin="10dp"
+            android:onClick="googleSign"
+            />
+
+        <Button
+            android:id="@+id/buttonF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FB"
+            android:background="@color/orange_light"
+            android:layout_margin="10dp"
+            android:onClick="facebookSign"
             />
 
     </LinearLayout>

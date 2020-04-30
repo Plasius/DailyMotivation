@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".activities.PreviousActivity" />
         <activity android:name=".activities.FavoritesActivity" />
-        <activity android:name=".activities.HomeActivity"/>
+        <activity android:name=".activities.HomeActivity" />
     </application>
 
 </manifest>
