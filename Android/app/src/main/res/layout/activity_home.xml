@@ -21,7 +21,7 @@
         android:background="@color/orange_light"
         android:padding="15dp"
         android:textColor="@color/black"
-        android:onClick="signOut"
-        android:text="@string/log_out"/>
+        android:onClick="onSettingsClicked"
+        android:text="@string/settings"/>
 
 </LinearLayout>

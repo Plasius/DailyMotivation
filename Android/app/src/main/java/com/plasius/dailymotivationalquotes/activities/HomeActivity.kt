@@ -1,8 +1,10 @@
 package com.plasius.dailymotivationalquotes.activities
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.plasius.dailymotivationalquotes.R
 import java.util.GregorianCalendar
 
@@ -10,7 +12,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
 
         if(wasActiveToday()){
             val quote = getSharedPreferences("localdata", Context.MODE_PRIVATE).getString("Quote", null)
@@ -43,6 +45,11 @@ class HomeActivity : AppCompatActivity() {
 
     private fun fetchUserQuotes():Array<Int>{
         return arrayOf(0,2)
+    }
+
+    fun onSettingsClicked(view: View) {
+        var intent= Intent(this, UserSettingsActivity::class.java)
+        startActivity(intent)
     }
 
 }
