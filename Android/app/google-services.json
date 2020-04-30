@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "714464413444-o69omo6pcuc10ivqas42u3ttecv6dig0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plasius.dailymotivationalquotes",
+            "certificate_hash": "af2ed8577c54b57f18e7875e729dd590469c96de"
+          }
+        },
+        {
           "client_id": "714464413444-khr7lgcqmf0ka8d6p9m6065scenpv2ce.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
