@@ -5,14 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.UserSettingsActivity"
-    android:padding="15dp">
+    android:padding="15dp"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/curUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/log_out"
+        android:layout_marginBottom="15dp"
+        android:background="@color/orange_light"
+        android:onClick="trigLogout"
+        />
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/log_out"
+        android:text="@string/delete_user"
+        android:layout_marginBottom="15dp"
         android:background="@color/orange_light"
-        android:onClick="trigLogout"
+        android:onClick="trigDelete"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New e-mail:"
+        />
+
+    <EditText
+        android:id="@+id/nMail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="@string/prompt_email"
+        />
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/prompt_email"
+        android:layout_marginBottom="15dp"
+        android:background="@color/orange_light"
+        android:onClick="trigUpdateMail"
+        />
+
 
 </LinearLayout>
