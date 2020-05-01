@@ -58,5 +58,27 @@
         android:onClick="trigUpdateMail"
         />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New username"
+        />
+
+    <EditText
+        android:id="@+id/nUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="@string/username"
+        />
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/username"
+        android:layout_marginBottom="15dp"
+        android:background="@color/orange_light"
+        android:onClick="trigUpdateUser"
+        />
 
 </LinearLayout>
