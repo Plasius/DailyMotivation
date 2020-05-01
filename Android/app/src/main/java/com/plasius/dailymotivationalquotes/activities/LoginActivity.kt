@@ -35,14 +35,15 @@ class LoginActivity : AppCompatActivity() {
 
     fun updateUI(currentUser: FirebaseUser?){
             if(currentUser != null){
-                var intent=Intent(this, HomeActivity::class.java)
+                val intent=Intent(this, HomeActivity::class.java)
                 startActivity(intent)
+                finish()
             }
     }
 
     fun trig_signup(view: View) {
-        var email = et_email.text.toString()
-        var password = et_password.text.toString()
+        val email = et_email.text.toString()
+        val password = et_password.text.toString()
 
         if(email == "" || password == ""){
             updateUI(null)
