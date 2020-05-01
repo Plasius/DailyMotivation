@@ -20,5 +20,6 @@
     <string name="username">Username</string>
     <string name="save">Save</string>
     <string name="c_username">Changed username to: </string>
+    <string name="success">Success!</string>
 
 </resources>

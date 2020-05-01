@@ -81,4 +81,26 @@
         android:onClick="trigUpdateUser"
         />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New password"
+        />
+
+    <EditText
+        android:id="@+id/nPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/prompt_password"
+        />
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/prompt_password"
+        android:layout_marginBottom="15dp"
+        android:background="@color/orange_light"
+        android:onClick="trigUpdatePass"
+        />
 </LinearLayout>

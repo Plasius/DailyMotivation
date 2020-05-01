@@ -107,7 +107,6 @@ class UserSettingsActivity : AppCompatActivity() {
         // Create the AlertDialog object and return it
         builder.create().show()
 
-
     }
 
     fun trigUpdateUser(view: View) {
@@ -123,6 +122,38 @@ class UserSettingsActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, R.string.c_username, Toast.LENGTH_SHORT).show()
                 }
             }
+    }
+
+    fun updatePass(){
+        val user = auth.currentUser
+        val password = nPass.text.toString()
+
+        user!!.updatePassword(password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(baseContext, R.string.success,Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    Toast.makeText(baseContext, "Failed",Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    fun trigUpdatePass(view: View) {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Change password?")
+            .setPositiveButton(R.string.save,
+                DialogInterface.OnClickListener { dialog, id ->
+                    updatePass()
+                })
+            .setNegativeButton(R.string.cancel,
+                DialogInterface.OnClickListener { dialog, id ->
+                    // User cancelled the dialog
+                })
+        // Create the AlertDialog object and return it
+        builder.create().show()
 
     }
+
+
 }
