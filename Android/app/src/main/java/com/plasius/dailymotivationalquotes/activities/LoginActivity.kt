@@ -11,12 +11,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.FirebaseUserMetadata
-import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.*
 import com.plasius.dailymotivationalquotes.R
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_user_settings.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -41,6 +39,22 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+    fun setDisplay(){
+        var email = et_email.text.toString()
+        val username = email.split("@")
+
+        val user = auth.currentUser
+
+        val profileUpdates = UserProfileChangeRequest.Builder().setDisplayName(username[0]).build()
+
+        user!!.updateProfile(profileUpdates)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(baseContext, R.string.c_username, Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
     fun trig_signup(view: View) {
         val email = et_email.text.toString()
         val password = et_password.text.toString()
@@ -50,13 +64,12 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-
-
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
+                    setDisplay()
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -67,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
 
                 // ...
             }
+
     }
 
     fun trig_signin(view: View) {
