@@ -37,6 +37,7 @@ class HomeActivity : AppCompatActivity() {
             val quote = getSharedPreferences("localdata", Context.MODE_PRIVATE).getString("quote", null)
             Toast.makeText(baseContext, "quote loaded: $quote", Toast.LENGTH_LONG).show()
 
+
         }else{
 
             if(!quotesLoaded && !userQuotesLoaded){

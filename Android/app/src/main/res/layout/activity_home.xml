@@ -24,4 +24,12 @@
         android:onClick="onSettingsClicked"
         android:text="@string/settings"/>
 
+    <TextView
+        android:id="@+id/textQuote"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_margin="15dp"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
 </LinearLayout>
