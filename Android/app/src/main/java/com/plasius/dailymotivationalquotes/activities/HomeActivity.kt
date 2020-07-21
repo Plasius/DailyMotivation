@@ -15,6 +15,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.plasius.dailymotivationalquotes.R
+import kotlinx.android.synthetic.main.activity_home.*
 import java.util.GregorianCalendar
 import java.util.concurrent.ThreadLocalRandom
 
@@ -36,7 +37,7 @@ class HomeActivity : AppCompatActivity() {
         if(wasActiveToday()){
             val quote = getSharedPreferences("localdata", Context.MODE_PRIVATE).getString("quote", null)
             Toast.makeText(baseContext, "quote loaded: $quote", Toast.LENGTH_LONG).show()
-
+            textQuote.text = quote;
 
         }else{
 
@@ -86,6 +87,7 @@ class HomeActivity : AppCompatActivity() {
             getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", GregorianCalendar.getInstance().get(GregorianCalendar.DATE)).apply()
 
             Toast.makeText(baseContext, "quote loaded: ${quotes[quoteId]}", Toast.LENGTH_LONG).show()
+            textQuote.text = quotes[quoteId];
         }
     }
 
