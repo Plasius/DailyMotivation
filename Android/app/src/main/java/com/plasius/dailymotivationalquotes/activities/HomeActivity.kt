@@ -25,18 +25,25 @@ class HomeActivity : AppCompatActivity() {
     private var quotesLoaded = false
     private var userQuotesLoaded = false
     private val uid = FirebaseAuth.getInstance().currentUser!!.uid
+    private val displayName = FirebaseAuth.getInstance().currentUser?.displayName.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        greeter()
         displayQuote()
+    }
+
+    private fun greeter(){
+        // lol maybe this shouldn't be a separate function
+        textGreeter.text = "Welcome $displayName!"
     }
 
     private fun displayQuote(){
         if(wasActiveToday()){
             val quote = getSharedPreferences("localdata", Context.MODE_PRIVATE).getString("quote", null)
-            Toast.makeText(baseContext, "quote loaded: $quote", Toast.LENGTH_LONG).show()
+            //Toast.makeText(baseContext, "quote loaded: $quote", Toast.LENGTH_LONG).show()
             textQuote.text = quote;
 
         }else{
@@ -86,7 +93,7 @@ class HomeActivity : AppCompatActivity() {
             getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putString("quote", quotes[quoteId]).apply()
             getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", GregorianCalendar.getInstance().get(GregorianCalendar.DATE)).apply()
 
-            Toast.makeText(baseContext, "quote loaded: ${quotes[quoteId]}", Toast.LENGTH_LONG).show()
+            //Toast.makeText(baseContext, "quote loaded: ${quotes[quoteId]}", Toast.LENGTH_LONG).show()
             textQuote.text = quotes[quoteId];
         }
     }
