@@ -2,22 +2,24 @@ package com.plasius.dailymotivationalquotes.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.plasius.dailymotivationalquotes.R
 import kotlinx.android.synthetic.main.activity_home.*
-import java.util.GregorianCalendar
+import java.util.*
 import java.util.concurrent.ThreadLocalRandom
+
 
 class HomeActivity : AppCompatActivity() {
     private var quotes : List<String> = listOf()
@@ -152,9 +154,22 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    fun onSettingsClicked(view: View) {
-        val intent= Intent(this, UserSettingsActivity::class.java)
-        startActivity(intent)
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.home_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.getItemId() == R.id.settings){
+            val intent= Intent(this, UserSettingsActivity::class.java)
+            startActivity(intent)
+            return true
+        }else {
+           return super.onOptionsItemSelected(item!!)
+        }
+
     }
 
 }

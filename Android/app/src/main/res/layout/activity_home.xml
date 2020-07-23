@@ -8,21 +8,6 @@
     tools:context=".activities.HomeActivity">
 
 
-   <!-- <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Hello World!" />-->
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/orange_light"
-        android:padding="15dp"
-        android:layout_margin="15dp"
-        android:textColor="@color/black"
-        android:onClick="onSettingsClicked"
-        android:text="@string/settings"/>
 
     <TextView
         android:id="@+id/textGreeter"
@@ -45,6 +30,6 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="italic" />
+        android:textStyle="italic|bold" />
 
 </LinearLayout>
