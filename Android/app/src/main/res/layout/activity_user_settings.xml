@@ -103,4 +103,16 @@
         android:background="@color/orange_light"
         android:onClick="trigUpdatePass"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send email to developers"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Send"
+        android:background="@color/orange_light"
+        android:onClick="trigFeedback" />
+
 </LinearLayout>

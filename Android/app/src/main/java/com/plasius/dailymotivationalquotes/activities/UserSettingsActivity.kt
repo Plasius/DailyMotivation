@@ -37,6 +37,24 @@ class UserSettingsActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun trigFeedback(view: View) {
+        val email = arrayOf("studios.plotberry@gmail.com")
+        val subject = "DMQ - Feedback"
+        val message = ""
+
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_EMAIL, email)
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, message)
+            type = "message/rfc822"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, "Send email using:")
+        startActivity(shareIntent)
+
+    }
+
     fun deleteUser(){
         val user = auth.currentUser!!
 
@@ -154,6 +172,5 @@ class UserSettingsActivity : AppCompatActivity() {
         builder.create().show()
 
     }
-
 
 }
