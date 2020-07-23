@@ -6,6 +6,8 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.icu.text.Transliterator.getDisplayName
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,10 +29,9 @@ class UserSettingsActivity : AppCompatActivity() {
 
         auth= FirebaseAuth.getInstance()
 
-        curUser.text=auth.currentUser?.displayName.toString()
     }
 
-    fun trigLogout(view: View) {
+    fun trigLogout(view: View?) {
         auth.signOut()
         val intent= Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -68,7 +69,7 @@ class UserSettingsActivity : AppCompatActivity() {
                 }
                 else{
                     Toast.makeText(baseContext, R.string.welcome, Toast.LENGTH_LONG).show()
-                    logoutButton.callOnClick()
+                    trigLogout(null)
                 }
             }
     }
@@ -105,7 +106,7 @@ class UserSettingsActivity : AppCompatActivity() {
                 }
                 else{
                     Toast.makeText(baseContext, "Failed", Toast.LENGTH_SHORT).show()
-                    logoutButton.callOnClick()
+                    trigLogout(null)
                 }
             }
     }
@@ -170,6 +171,24 @@ class UserSettingsActivity : AppCompatActivity() {
                 })
         // Create the AlertDialog object and return it
         builder.create().show()
+
+    }
+
+
+    //MENU
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.settings_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.getItemId() == R.id.signout){
+            trigLogout(null)
+            return true
+        }else {
+            return super.onOptionsItemSelected(item!!)
+        }
 
     }
 

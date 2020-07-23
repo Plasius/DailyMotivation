@@ -1,44 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".activities.UserSettingsActivity"
     android:padding="15dp"
     android:orientation="vertical"
     >
 
     <TextView
-        android:id="@+id/curUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        />
-
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/log_out"
-        android:layout_marginBottom="15dp"
-        android:background="@color/orange_light"
-        android:onClick="trigLogout"
-        />
-
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/delete_user"
-        android:layout_marginBottom="15dp"
-        android:background="@color/orange_light"
-        android:onClick="trigDelete"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New e-mail:"
+        android:text="Edit your profile."
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginBottom="30dp"
         />
 
     <EditText
@@ -46,73 +29,77 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:hint="@string/prompt_email"
+        android:hint="new email..."
+        android:gravity="center"
         />
 
     <Button
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:text="@string/prompt_email"
         android:layout_marginBottom="15dp"
         android:background="@color/orange_light"
         android:onClick="trigUpdateMail"
+
+
         />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New username"
-        />
 
     <EditText
         android:id="@+id/nUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:hint="@string/username"
+        android:hint="new username..."
+        android:gravity="center"
         />
 
     <Button
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:text="@string/username"
         android:layout_marginBottom="15dp"
         android:background="@color/orange_light"
         android:onClick="trigUpdateUser"
         />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New password"
-        />
 
     <EditText
         android:id="@+id/nPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="@string/prompt_password"
+        android:hint="new password..."
+        android:gravity="center"
         />
 
     <Button
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:text="@string/prompt_password"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="60dp"
         android:background="@color/orange_light"
         android:onClick="trigUpdatePass"
+
         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Send email to developers"/>
 
     <Button
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Send"
+        android:layout_width="match_parent"
+        android:text="Send feedback to developers"
         android:background="@color/orange_light"
+        android:layout_marginBottom="15dp"
         android:onClick="trigFeedback" />
 
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/delete_user"
+            android:layout_marginBottom="15dp"
+            android:background="@color/orange_light"
+            android:onClick="trigDelete"
+            />
+
 </LinearLayout>
+
+</ScrollView>
