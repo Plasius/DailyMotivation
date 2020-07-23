@@ -28,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
     private var userQuotesLoaded = false
     private val uid = FirebaseAuth.getInstance().currentUser!!.uid
     private val displayName = FirebaseAuth.getInstance().currentUser?.displayName.toString()
+    var currentQuote="";
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +40,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun greeter(){
         // lol maybe this shouldn't be a separate function
-        val greet= arrayOf("Welcome", "Hi", "Greetings,", "Hello there, General")  //add memes
+        val greet= arrayOf("Welcome", "Hi", "Greetings,", "Hello there, General", "I did not. Oh, hi")  //add memes
         val curGreet = greet.random()
 
         textGreeter.text = "$curGreet $displayName!"
@@ -49,7 +50,8 @@ class HomeActivity : AppCompatActivity() {
         if(wasActiveToday()){
             val quote = getSharedPreferences("localdata", Context.MODE_PRIVATE).getString("quote", null)
             //Toast.makeText(baseContext, "quote loaded: $quote", Toast.LENGTH_LONG).show()
-            textQuote.text = quote;
+            textQuote.text = quote
+            currentQuote = quote.toString()
 
         }else{
 
@@ -99,7 +101,8 @@ class HomeActivity : AppCompatActivity() {
             getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", GregorianCalendar.getInstance().get(GregorianCalendar.DATE)).apply()
 
             //Toast.makeText(baseContext, "quote loaded: ${quotes[quoteId]}", Toast.LENGTH_LONG).show()
-            textQuote.text = quotes[quoteId];
+            textQuote.text = quotes[quoteId]
+            currentQuote = quotes[quoteId]
         }
     }
 
@@ -169,6 +172,18 @@ class HomeActivity : AppCompatActivity() {
         }else {
            return super.onOptionsItemSelected(item!!)
         }
+
+    }
+
+    fun trigShare(view: View) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, currentQuote)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
 
     }
 
