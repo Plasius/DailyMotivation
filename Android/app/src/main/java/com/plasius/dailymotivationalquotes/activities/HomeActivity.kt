@@ -144,7 +144,7 @@ class HomeActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(baseContext, "Failed to access user quotes", Toast.LENGTH_LONG).show()
+                Toast.makeText(baseContext, getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
             }
         })
     }

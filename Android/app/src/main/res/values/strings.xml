@@ -21,5 +21,8 @@
     <string name="save">Save</string>
     <string name="c_username">Changed username to: </string>
     <string name="success">Success!</string>
+    <string name="fetching">Fetching your daily quote…</string>
+    <string name="check_connection">Please check your internet connection.</string>
+    <string name="something_wrong">Oops. Something went wrong.</string>
 
 </resources>

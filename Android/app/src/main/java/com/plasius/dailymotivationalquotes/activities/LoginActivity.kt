@@ -73,12 +73,11 @@ class LoginActivity : AppCompatActivity() {
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
-                    Toast.makeText(baseContext, "Authentication failed.",
+                    Toast.makeText(baseContext, getString(R.string.something_wrong),
                         Toast.LENGTH_SHORT).show()
                     updateUI(null)
                 }
 
-                // ...
             }
 
     }
@@ -100,13 +99,12 @@ class LoginActivity : AppCompatActivity() {
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
-                    Toast.makeText(baseContext, "Authentication failed.",
+                    Toast.makeText(baseContext, getString(R.string.something_wrong),
                         Toast.LENGTH_SHORT).show()
                     updateUI(null)
                     // ...
                 }
 
-                // ...
             }
     }
 
@@ -136,14 +134,12 @@ class LoginActivity : AppCompatActivity() {
 
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
-                Toast.makeText(baseContext, "Google sign in failed.$resultCode", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
-        Toast.makeText(baseContext, "Authentication in process #2.", Toast.LENGTH_SHORT).show()
-
         val credential = GoogleAuthProvider.getCredential(idToken, null)
 
         auth.signInWithCredential(credential)
@@ -152,7 +148,7 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     updateUI(auth.currentUser)
                 } else {
-                    Toast.makeText(baseContext, "Firebase failed.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show()
                     updateUI(null)
                 }
             }
@@ -172,7 +168,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, getString(R.string.mail_sent), Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    Toast.makeText(baseContext, "Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show()
                 }
             }
     }
