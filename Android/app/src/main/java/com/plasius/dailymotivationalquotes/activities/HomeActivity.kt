@@ -37,7 +37,10 @@ class HomeActivity : AppCompatActivity() {
 
     private fun greeter(){
         // lol maybe this shouldn't be a separate function
-        textGreeter.text = "Welcome $displayName!"
+        val greet= arrayOf("Welcome", "Hi", "Greetings,", "Hello there, General")  //add memes
+        val curGreet = greet.random()
+
+        textGreeter.text = "$curGreet $displayName!"
     }
 
     private fun displayQuote(){
