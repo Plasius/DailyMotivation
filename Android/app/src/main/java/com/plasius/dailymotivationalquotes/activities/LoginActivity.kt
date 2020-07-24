@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
         user!!.updateProfile(profileUpdates)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(baseContext, R.string.c_username, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, R.string.username_changed, Toast.LENGTH_SHORT).show()
                 }
             }
     }
@@ -165,7 +165,7 @@ class LoginActivity : AppCompatActivity() {
         auth.sendPasswordResetEmail(emailAddress)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(baseContext, getString(R.string.mail_sent), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, getString(R.string.sent_email), Toast.LENGTH_SHORT).show()
                 }
                 else{
                     Toast.makeText(baseContext, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show()

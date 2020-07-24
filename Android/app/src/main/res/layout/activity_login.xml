@@ -20,7 +20,7 @@
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/prompt_email"
+        android:hint="@string/email_lwr"
         android:inputType="textEmailAddress"
         />
 
@@ -28,7 +28,7 @@
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/prompt_password"
+        android:hint="@string/password_lwr"
         android:inputType="textPassword" />
 
     <Button
@@ -37,7 +37,7 @@
         android:layout_gravity="right"
         android:background="@android:color/transparent"
         android:backgroundTint="#00FFFFFF"
-        android:text="@string/fpass"
+        android:text="@string/password_forgot"
         android:onClick="resPass"/>
 
     <LinearLayout
@@ -56,13 +56,13 @@
             android:background="@color/orange_light"
             android:backgroundTintMode="add"
             android:onClick="trig_signup"
-            android:text="@string/action_sign_up" />
+            android:text="@string/sign_up" />
 
         <Button
             android:id="@+id/si_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_activity_login"
+            android:text="@string/sign_in"
             android:background="@color/orange_light"
             android:layout_margin="10dp"
             android:onClick="trig_signin"

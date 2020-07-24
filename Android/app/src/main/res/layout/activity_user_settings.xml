@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit your profile."
+        android:text="@string/edit_profile"
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -29,14 +29,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:hint="new email..."
+        android:hint="@string/email_new"
         android:gravity="center"
         />
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="@string/prompt_email"
+        android:text="@string/email_set"
         android:layout_marginBottom="15dp"
         android:background="@color/orange_light"
         android:onClick="trigUpdateMail"
@@ -50,14 +50,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:hint="new username..."
+        android:hint="@string/username_new"
         android:gravity="center"
         />
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="@string/username"
+        android:text="@string/username_set"
         android:layout_marginBottom="15dp"
         android:background="@color/orange_light"
         android:onClick="trigUpdateUser"
@@ -69,14 +69,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="new password..."
+        android:hint="@string/password_new"
         android:gravity="center"
         />
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="@string/prompt_password"
+        android:text="@string/password_reset"
         android:layout_marginBottom="60dp"
         android:background="@color/orange_light"
         android:onClick="trigUpdatePass"
@@ -86,7 +86,7 @@
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Send feedback to developers"
+        android:text="@string/feedback"
         android:background="@color/orange_light"
         android:layout_marginBottom="15dp"
         android:onClick="trigFeedback" />
@@ -94,7 +94,7 @@
         <Button
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="@string/delete_user"
+            android:text="@string/user_delete"
             android:layout_marginBottom="15dp"
             android:background="@color/orange_light"
             android:onClick="trigDelete"

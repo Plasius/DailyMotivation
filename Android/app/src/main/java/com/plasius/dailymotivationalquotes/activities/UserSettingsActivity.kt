@@ -77,8 +77,8 @@ class UserSettingsActivity : AppCompatActivity() {
     fun trigDelete(view: View) {
 
         val builder = AlertDialog.Builder(this)
-        builder.setMessage(R.string.delete_user)
-            .setPositiveButton(R.string.delete_user,
+        builder.setMessage(R.string.user_delete)
+            .setPositiveButton(R.string.user_delete,
                 DialogInterface.OnClickListener { dialog, id ->
                     deleteUser()
                 })
@@ -114,7 +114,7 @@ class UserSettingsActivity : AppCompatActivity() {
     fun trigUpdateMail(view: View) {
 
         val builder = AlertDialog.Builder(this)
-        builder.setMessage(R.string.c_mail)
+        builder.setMessage(R.string.email_change)
             .setPositiveButton(R.string.save,
                 DialogInterface.OnClickListener { dialog, id ->
                     updateMail()
@@ -138,7 +138,7 @@ class UserSettingsActivity : AppCompatActivity() {
         user!!.updateProfile(profileUpdates)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(baseContext, R.string.c_username, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, R.string.username_changed, Toast.LENGTH_SHORT).show()
                 }
             }
     }
