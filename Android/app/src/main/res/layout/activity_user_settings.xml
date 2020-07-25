@@ -86,19 +86,27 @@
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:text="@string/rate"
+        android:background="@color/orange_light"
+        android:layout_marginBottom="15dp"
+        android:onClick="trigRate" />
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:text="@string/feedback"
         android:background="@color/orange_light"
         android:layout_marginBottom="15dp"
         android:onClick="trigFeedback" />
 
-        <Button
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/user_delete"
-            android:layout_marginBottom="15dp"
-            android:background="@color/orange_light"
-            android:onClick="trigDelete"
-            />
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/user_delete"
+        android:layout_marginBottom="15dp"
+        android:background="@color/orange_light"
+        android:onClick="trigDelete"
+        />
 
 </LinearLayout>
 

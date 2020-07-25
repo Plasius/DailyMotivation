@@ -33,6 +33,7 @@
     <string name="feedback">Send feedback to developers</string>
     <string name="fetching">Fetching your daily quote…</string>
     <string name="user_delete">Delete user</string>
+    <string name="rate">Rate on Play Store</string>
     <string name="sent_email">Email sent</string>
     <string name="save">Save</string>
     <string name="sign_in">Sign in</string>

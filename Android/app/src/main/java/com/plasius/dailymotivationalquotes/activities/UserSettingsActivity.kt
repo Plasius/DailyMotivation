@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.icu.text.Transliterator.getDisplayName
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -190,6 +191,11 @@ class UserSettingsActivity : AppCompatActivity() {
             return super.onOptionsItemSelected(item!!)
         }
 
+    }
+
+    fun trigRate(view: View) {
+        var sendIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.plasius.dailymotivationalquotes"))
+        startActivity(sendIntent)
     }
 
 }
