@@ -24,11 +24,13 @@ import java.util.concurrent.ThreadLocalRandom
 class HomeActivity : AppCompatActivity() {
     private var quotes : List<String> = listOf()
     private var userQuotes : List<Int> = listOf()
+    private var userFav: List<Int> = listOf()
     private var quotesLoaded = false
     private var userQuotesLoaded = false
     private val uid = FirebaseAuth.getInstance().currentUser!!.uid
     private val displayName = FirebaseAuth.getInstance().currentUser?.displayName.toString()
-    var currentQuote="";
+    var currentQuote = ""
+    var currentQuoteId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,7 @@ class HomeActivity : AppCompatActivity() {
     private fun displayQuote(){
         if(wasActiveToday()){
             val quote = getSharedPreferences("localdata", Context.MODE_PRIVATE).getString("quote", null)
+            currentQuoteId = getSharedPreferences("localdata", Context.MODE_PRIVATE).getInt("quoteID", 0)
             //Toast.makeText(baseContext, "quote loaded: $quote", Toast.LENGTH_LONG).show()
             textQuote.text = quote
             currentQuote = quote.toString()
@@ -98,11 +101,13 @@ class HomeActivity : AppCompatActivity() {
             Firebase.database.getReference("userdata").child(uid).child("quotes").child(userQuotes.size.toString()).setValue(quoteId)
 
             getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putString("quote", quotes[quoteId]).apply()
+            getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("quoteID", quoteId).apply()
             getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", GregorianCalendar.getInstance().get(GregorianCalendar.DATE)).apply()
 
             //Toast.makeText(baseContext, "quote loaded: ${quotes[quoteId]}", Toast.LENGTH_LONG).show()
             textQuote.text = quotes[quoteId]
             currentQuote = quotes[quoteId]
+            currentQuoteId = quoteId
         }
     }
 
@@ -185,6 +190,55 @@ class HomeActivity : AppCompatActivity() {
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
 
+    }
+
+    private fun fetchUserFavourite(){
+        val reference = Firebase.database.getReference("userdata/$uid/favourite")
+        reference.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                val temp = dataSnapshot.getValue<List<Int>>()
+                if(temp==null){
+                    userFav = listOf()
+                }else{
+                    userFav = temp
+                }
+
+               // display stuff
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(baseContext, getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    fun addFav(){
+        Firebase.database.getReference("userdata").child(uid).child("favourite").child(userFav.size.toString()).setValue(currentQuoteId)
+        Toast.makeText(baseContext, "Added $currentQuoteId to favourite", Toast.LENGTH_LONG).show()
+    }
+
+    fun removeFav(){
+        Toast.makeText(baseContext, "Coming soon...", Toast.LENGTH_LONG).show()
+    }
+
+    fun isFavourite(): Boolean {
+        for(n in userFav){
+            if(n == currentQuoteId)
+                return true
+        }
+        return false
+    }
+
+    fun trigFav(view: View) {
+        fetchUserFavourite()
+
+        if(!isFavourite()){
+            addFav()
+        }else{
+            removeFav()
+        }
     }
 
 }
