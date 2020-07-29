@@ -174,6 +174,10 @@ class HomeActivity : AppCompatActivity() {
             val intent= Intent(this, UserSettingsActivity::class.java)
             startActivity(intent)
             return true
+        }else if(item?.getItemId() == R.id.fav){
+            val intent= Intent(this, FavoritesActivity::class.java)
+            startActivity(intent)
+            return true
         }else {
            return super.onOptionsItemSelected(item!!)
         }
