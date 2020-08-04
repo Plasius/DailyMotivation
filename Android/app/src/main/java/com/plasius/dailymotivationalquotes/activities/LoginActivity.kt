@@ -1,5 +1,6 @@
 package com.plasius.dailymotivationalquotes.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,44 +16,34 @@ import com.google.firebase.auth.*
 import com.plasius.dailymotivationalquotes.R
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_user_settings.*
+import java.util.*
+import kotlin.time.days
 
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
+        var lastLogin = getSharedPreferences("localdata", Context.MODE_PRIVATE).getInt("lastDay", -1)
+        var today = GregorianCalendar.getInstance().get(GregorianCalendar.DATE)
+
+       Log.d("logincct", (today - lastLogin ).toString())
 
         setContentView(R.layout.activity_login)
 
     }
 
-    fun updateUI(currentUser: FirebaseUser?){
-            if(currentUser != null){
+    fun updateUI(succes: Boolean){
+        if (succes){
+                getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", GregorianCalendar.getInstance().get(GregorianCalendar.DATE)).apply()
+
                 val intent=Intent(this, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
-            }
-    }
-
-    fun setDisplay(){
-        var email = et_email.text.toString()
-        val username = email.split("@")
-
-        val user = auth.currentUser
-
-        val profileUpdates = UserProfileChangeRequest.Builder().setDisplayName(username[0]).build()
-
-        user!!.updateProfile(profileUpdates)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(baseContext, R.string.username_changed, Toast.LENGTH_SHORT).show()
-                }
-            }
+        }else{
+            Toast.makeText(baseContext, R.string.login_failed, Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun trig_signup(view: View) {
@@ -60,26 +51,10 @@ class LoginActivity : AppCompatActivity() {
         val password = et_password.text.toString()
 
         if(email == "" || password == ""){
-            updateUI(null)
+            updateUI(false)
             return
         }
-
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    val user = auth.currentUser
-                    setDisplay()
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(baseContext, getString(R.string.something_wrong),
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-
-            }
-
+        updateUI(true)
     }
 
     fun trig_signin(view: View) {
@@ -87,90 +62,22 @@ class LoginActivity : AppCompatActivity() {
         var password = et_password.text.toString()
 
         if(email == "" || password == ""){
-            updateUI(null)
+            updateUI(false)
             return
         }
-
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(baseContext, getString(R.string.something_wrong),
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                    // ...
-                }
-
-            }
+        updateUI(true)
     }
 
     fun googleSign(view: View) {
 
-        // Configure Google Sign In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        startActivityForResult(mGoogleSignInClient.signInIntent, 320)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == 320) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                val account = task.getResult(ApiException::class.java)!!
-
-                firebaseAuthWithGoogle(account.idToken!!)
-            } catch (e: ApiException) {
-                Toast.makeText(baseContext, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    updateUI(auth.currentUser)
-                } else {
-                    Toast.makeText(baseContext, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-            }
     }
 
     fun resPass(view: View) {
         var emailAddress = et_email.text.toString()
 
-        if(emailAddress == ""){
-            updateUI(null)
+        if (emailAddress == "") {
+            updateUI(false)
             return
         }
-
-        auth.sendPasswordResetEmail(emailAddress)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(baseContext, getString(R.string.sent_email), Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    Toast.makeText(baseContext, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show()
-                }
-            }
     }
-
 }

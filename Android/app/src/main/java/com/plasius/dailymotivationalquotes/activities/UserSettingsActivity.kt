@@ -22,25 +22,21 @@ import com.plasius.dailymotivationalquotes.R.string
 
 class UserSettingsActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_settings)
 
-        auth= FirebaseAuth.getInstance()
 
     }
 
     fun trigLogout(view: View?) {
-        auth.signOut()
         val intent= Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 
     fun trigFeedback(view: View) {
-        val email = arrayOf("studios.plotberry@gmail.com")
+        val email = arrayOf("supp.plotberry@gmail.com")
         val subject = "DMQ - Feedback"
         val message = ""
 
@@ -58,21 +54,7 @@ class UserSettingsActivity : AppCompatActivity() {
     }
 
     fun deleteUser(){
-        val user = auth.currentUser!!
 
-        user.delete()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(baseContext,"Success!",Toast.LENGTH_SHORT).show()
-                    val intent= Intent(this, LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                }
-                else{
-                    Toast.makeText(baseContext, R.string.welcome, Toast.LENGTH_LONG).show()
-                    trigLogout(null)
-                }
-            }
     }
 
     fun trigDelete(view: View) {
@@ -94,22 +76,7 @@ class UserSettingsActivity : AppCompatActivity() {
     }
 
     fun updateMail(){
-        val user = auth.currentUser
 
-        val newMail = nMail.text.toString()
-
-        Toast.makeText(baseContext, "Changing e-mail to: $newMail", Toast.LENGTH_SHORT).show()
-
-        user!!.updateEmail(newMail)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(baseContext, "Changed e-mail to: $newMail", Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    Toast.makeText(baseContext, "Failed", Toast.LENGTH_SHORT).show()
-                    trigLogout(null)
-                }
-            }
     }
 
     fun trigUpdateMail(view: View) {
@@ -132,31 +99,10 @@ class UserSettingsActivity : AppCompatActivity() {
     fun trigUpdateUser(view: View) {
         val username = nUsername.text.toString()
 
-        val user = auth.currentUser
-
-        val profileUpdates = UserProfileChangeRequest.Builder().setDisplayName(username).build()
-
-        user!!.updateProfile(profileUpdates)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(baseContext, R.string.username_changed, Toast.LENGTH_SHORT).show()
-                }
-            }
     }
 
     fun updatePass(){
-        val user = auth.currentUser
-        val password = nPass.text.toString()
 
-        user!!.updatePassword(password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(baseContext, R.string.success,Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    Toast.makeText(baseContext, "Failed",Toast.LENGTH_SHORT).show()
-                }
-            }
     }
 
     fun trigUpdatePass(view: View) {
