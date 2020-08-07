@@ -28,7 +28,9 @@ class LoginActivity : AppCompatActivity() {
         var lastLogin = getSharedPreferences("localdata", Context.MODE_PRIVATE).getInt("lastDay", -1)
         var today = GregorianCalendar.getInstance().get(GregorianCalendar.DATE)
 
-       Log.d("logincct", (today - lastLogin ).toString())
+        if(today - lastLogin < 5){
+            updateUI(true)
+        }
 
         setContentView(R.layout.activity_login)
 

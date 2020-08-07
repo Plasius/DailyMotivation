@@ -2,6 +2,7 @@ package com.plasius.dailymotivationalquotes.activities
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.icu.text.Transliterator.getDisplayName
@@ -30,6 +31,8 @@ class UserSettingsActivity : AppCompatActivity() {
     }
 
     fun trigLogout(view: View?) {
+        getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", 0).apply()
+
         val intent= Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
