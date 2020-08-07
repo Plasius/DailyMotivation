@@ -62,6 +62,13 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+    fun trigLogout(view: View?) {
+        getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", 0).apply()
+
+        val intent= Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
@@ -78,7 +85,10 @@ class HomeActivity : AppCompatActivity() {
             val intent= Intent(this, FavoritesActivity::class.java)
             startActivity(intent)
             return true
-        }else {
+        }else if(item?.getItemId() == R.id.signout){
+            trigLogout(null)
+            return true
+        }else{
            return super.onOptionsItemSelected(item!!)
         }
 

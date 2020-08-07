@@ -126,7 +126,7 @@ class UserSettingsActivity : AppCompatActivity() {
 
 
     //MENU
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.settings_menu, menu)
         return true
@@ -140,7 +140,7 @@ class UserSettingsActivity : AppCompatActivity() {
             return super.onOptionsItemSelected(item!!)
         }
 
-    }
+    }*/
 
     fun trigRate(view: View) {
         var sendIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.plasius.dailymotivationalquotes"))
