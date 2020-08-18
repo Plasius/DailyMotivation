@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.plasius.dailymotivationalquotes">
 
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -9,7 +12,8 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.UserSettingsActivity"></activity>
+
+        <activity android:name=".activities.UserSettingsActivity"/>
         <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +24,10 @@
         <activity android:name=".activities.PreviousActivity" />
         <activity android:name=".activities.FavoritesActivity" />
         <activity android:name=".activities.HomeActivity" />
+
+
+
+
     </application>
 
 </manifest>

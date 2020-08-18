@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.plasius.dailymotivationalquotes.R
+import com.plasius.dailymotivationalquotes.restapi.ApiClient
+import com.plasius.dailymotivationalquotes.restapi.SessionManager
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_user_settings.*
 import java.util.*
@@ -15,6 +17,9 @@ import kotlin.time.days
 
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var sessionManager: SessionManager
+    private lateinit var apiClient: ApiClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +33,8 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
+        apiClient = ApiClient()
+        sessionManager = SessionManager(this)
     }
 
     fun updateUI(succes: Boolean){
@@ -50,6 +57,25 @@ class LoginActivity : AppCompatActivity() {
             updateUI(false)
             return
         }
+
+        //USE WITH WORKING REST API SERVER
+        /*apiClient.getApiService().login(LoginRequest(email = "s@sample.com", password = "mypassword"))
+            .enqueue(object : Callback<LoginResponse> {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    // Error logging in
+                }
+
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                    val loginResponse = response.body()
+
+                    if (loginResponse?.statusCode == 200 && loginResponse.user != null) {
+                        sessionManager.saveAuthToken(loginResponse.authToken)
+                    } else {
+                        // Error logging in
+                    }
+                }
+            })*/
+
         updateUI(true)
     }
 
@@ -61,6 +87,25 @@ class LoginActivity : AppCompatActivity() {
             updateUI(false)
             return
         }
+
+        //USE WITH WORKING REST API SERVER
+        /*apiClient.getApiService().login(LoginRequest(email = "s@sample.com", password = "mypassword"))
+            .enqueue(object : Callback<LoginResponse> {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    // Error logging in
+                }
+
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                    val loginResponse = response.body()
+
+                    if (loginResponse?.statusCode == 200 && loginResponse.user != null) {
+                        sessionManager.saveAuthToken(loginResponse.authToken)
+                    } else {
+                        // Error logging in
+                    }
+                }
+            })*/
+
         updateUI(true)
     }
 
