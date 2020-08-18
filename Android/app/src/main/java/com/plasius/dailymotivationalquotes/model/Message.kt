@@ -9,6 +9,6 @@ data class Message (
     @SerializedName("quote")
     var quote: String,
 
-    @SerializedName("imgUrl")
-    var imgurl: String
+    @SerializedName("img_url")
+    var imgUrl: String
 )
