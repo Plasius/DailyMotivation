@@ -9,12 +9,20 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.plasius.dailymotivationalquotes.R
+import com.plasius.dailymotivationalquotes.model.Message
+import com.plasius.dailymotivationalquotes.restapi.ApiClient
+import com.plasius.dailymotivationalquotes.restapi.SessionManager
 import kotlinx.android.synthetic.main.activity_home.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 
 
 class HomeActivity : AppCompatActivity() {
+    private lateinit var sessionManager: SessionManager
+    private lateinit var apiClient: ApiClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +38,21 @@ class HomeActivity : AppCompatActivity() {
         val curGreet = greet.random()
 
         textGreeter.text = "$curGreet User!"
+    }
+
+    private fun fetchMessage() {
+
+        // Pass the token as parameter
+        apiClient.getApiService().fetchMessage(token = "Bearer ${sessionManager.fetchAuthToken()}")
+            .enqueue(object : Callback<Message> {
+                override fun onFailure(call: Call<Message>, t: Throwable) {
+                    // Error fetching posts
+                }
+
+                override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                    // Handle function to display posts
+                }
+            })
     }
 
     private fun displayQuote(){
