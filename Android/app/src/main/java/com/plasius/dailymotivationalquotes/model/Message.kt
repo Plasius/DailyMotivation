@@ -10,5 +10,5 @@ data class Message (
     var quote: String,
 
     @SerializedName("imgUrl")
-    var imgUrl: String
+    var imgurl: String
 )
