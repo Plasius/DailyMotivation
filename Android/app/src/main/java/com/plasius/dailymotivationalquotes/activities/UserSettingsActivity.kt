@@ -14,8 +14,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.plasius.dailymotivationalquotes.R
 import kotlinx.android.synthetic.main.activity_user_settings.*
 import kotlinx.android.synthetic.main.auxact_update_email.*
@@ -30,13 +28,6 @@ class UserSettingsActivity : AppCompatActivity() {
 
     }
 
-    fun trigLogout(view: View?) {
-        getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", 0).apply()
-
-        val intent= Intent(this, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-    }
 
     fun trigFeedback(view: View) {
         val email = arrayOf("supp.plotberry@gmail.com")
@@ -125,25 +116,9 @@ class UserSettingsActivity : AppCompatActivity() {
     }
 
 
-    //MENU
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.settings_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.getItemId() == R.id.signout){
-            trigLogout(null)
-            return true
-        }else {
-            return super.onOptionsItemSelected(item!!)
-        }
-
-    }*/
 
     fun trigRate(view: View) {
-        var sendIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.plasius.dailymotivationalquotes"))
+        val sendIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.plasius.dailymotivationalquotes"))
         startActivity(sendIntent)
     }
 

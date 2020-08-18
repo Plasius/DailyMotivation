@@ -8,13 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 import com.plasius.dailymotivationalquotes.R
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
@@ -62,7 +55,7 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    fun trigLogout(view: View?) {
+    private fun trigLogout() {
         getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", 0).apply()
 
         val intent= Intent(this, LoginActivity::class.java)
@@ -86,7 +79,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
             return true
         }else if(item?.getItemId() == R.id.signout){
-            trigLogout(null)
+            trigLogout()
             return true
         }else{
            return super.onOptionsItemSelected(item!!)
