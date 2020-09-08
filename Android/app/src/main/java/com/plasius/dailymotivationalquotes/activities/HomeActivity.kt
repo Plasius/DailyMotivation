@@ -42,7 +42,17 @@ class HomeActivity : AppCompatActivity() {
         val greet= arrayOf("Welcome", "Hi", "Greetings,", "Hello there, General", "I did not. Oh, hi")  //add memes
         val curGreet = greet.random()
 
-        textGreeter.text = "$curGreet User!"
+        val user = sessionManager.fetchUser()
+        var name = "Guest"
+        if(user != null) {
+            if (user.firstName != "") {
+                name = user.firstName
+            } else {
+                name = user.username
+            }
+        }
+
+        textGreeter.text = "$curGreet $name!"
     }
 
     private fun fetchQuote() {
