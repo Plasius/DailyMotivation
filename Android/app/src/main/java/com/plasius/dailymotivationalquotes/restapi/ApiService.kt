@@ -13,5 +13,5 @@ interface ApiService {
     fun register(@Body request: RegisterRequest): Call<RegisterResponse>
 
     @GET(Constants.QUOTES_URL)
-    fun fetchMessage(@Header("Authorization") token: String): Call<List<String>>
+    fun fetchQuote(@Header("Authorization") token: String): Call<List<Quote>>
 }
