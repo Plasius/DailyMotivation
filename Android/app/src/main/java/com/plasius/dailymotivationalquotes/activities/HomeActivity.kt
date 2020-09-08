@@ -97,6 +97,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun trigLogout() {
         getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", 0).apply()
+        sessionManager.saveAuthToken("")
 
         val intent= Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
