@@ -48,7 +48,7 @@ class HomeActivity : AppCompatActivity() {
     private fun fetchQuote() {
 
         // Pass the token as parameter
-        apiClient.getApiService().fetchQuote("Bearer ${sessionManager.fetchAuthToken()}")
+        apiClient.getApiService().fetchQuote(/*"Bearer ${sessionManager.fetchAuthToken()}"*/)
             .enqueue(object : Callback<List<Quote>> {
                 override fun onFailure(call: Call<List<Quote>>, t: Throwable) {
                     // Error fetching posts
