@@ -28,6 +28,10 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+
+        apiClient = ApiClient()
+        sessionManager = SessionManager(this)
+
         greeter()
         displayQuote()
     }
@@ -39,24 +43,26 @@ class HomeActivity : AppCompatActivity() {
 
         textGreeter.text = "$curGreet User!"
     }
-/*
+
     private fun fetchMessage() {
 
         // Pass the token as parameter
-        apiClient.getApiService().fetchMessage(token = "Bearer ${sessionManager.fetchAuthToken()}")
-            .enqueue(object : Callback<Message> {
-                override fun onFailure(call: Call<Message>, t: Throwable) {
+        apiClient.getApiService().fetchMessage("Bearer ${sessionManager.fetchAuthToken()}")
+            .enqueue(object : Callback<List<String>> {
+                override fun onFailure(call: Call<List<String>>, t: Throwable) {
                     // Error fetching posts
                 }
 
-                override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                override fun onResponse(call: Call<List<String>>, response: Response<List<String>>
+                ) {
                     // Handle function to display posts
+                    Toast.makeText(baseContext, response.body().toString(), Toast.LENGTH_SHORT).show()
                 }
             })
-    }*/
+    }
 
     private fun displayQuote(){
-
+        fetchMessage()
     }
 
     //checks if today's date has already been stored as local data
