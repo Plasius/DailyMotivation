@@ -39,7 +39,7 @@ class HomeActivity : AppCompatActivity() {
 
         textGreeter.text = "$curGreet User!"
     }
-
+/*
     private fun fetchMessage() {
 
         // Pass the token as parameter
@@ -53,7 +53,7 @@ class HomeActivity : AppCompatActivity() {
                     // Handle function to display posts
                 }
             })
-    }
+    }*/
 
     private fun displayQuote(){
 

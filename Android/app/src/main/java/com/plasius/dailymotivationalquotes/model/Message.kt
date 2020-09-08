@@ -2,6 +2,8 @@ package com.plasius.dailymotivationalquotes.model
 
 import com.google.gson.annotations.SerializedName
 
+//TODO
+
 data class Message (
     @SerializedName("id")
     var id: Int,
