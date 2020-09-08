@@ -108,6 +108,15 @@
         android:onClick="trigDelete"
         />
 
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/sign_out"
+        android:layout_marginBottom="15dp"
+        android:background="@color/orange_light"
+        android:onClick="trigLogout"
+        />
+
 </LinearLayout>
 
 </ScrollView>

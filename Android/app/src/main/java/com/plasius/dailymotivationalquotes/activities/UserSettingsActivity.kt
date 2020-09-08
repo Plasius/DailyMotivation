@@ -18,13 +18,18 @@ import com.plasius.dailymotivationalquotes.R
 import kotlinx.android.synthetic.main.activity_user_settings.*
 import kotlinx.android.synthetic.main.auxact_update_email.*
 import com.plasius.dailymotivationalquotes.R.string
+import com.plasius.dailymotivationalquotes.restapi.SessionManager
 
 class UserSettingsActivity : AppCompatActivity() {
+
+    private lateinit var sessionManager: SessionManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_settings)
 
+        sessionManager = SessionManager(this)
 
     }
 
@@ -115,7 +120,14 @@ class UserSettingsActivity : AppCompatActivity() {
 
     }
 
+    fun trigLogout(view: View) {
+        getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", 0).apply()
+        sessionManager.saveAuthToken("")
 
+        val intent= Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
 
     fun trigRate(view: View) {
         val sendIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.plasius.dailymotivationalquotes"))
