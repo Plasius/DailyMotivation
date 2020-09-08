@@ -116,6 +116,7 @@ class LoginActivity : AppCompatActivity() {
 
                     if (loginResponse?.status == "success") {
                         sessionManager.saveAuthToken(loginResponse.auth_token)
+                        sessionManager.saveUser(loginResponse.user)
                         Toast.makeText(baseContext, loginResponse.user.email, Toast.LENGTH_SHORT).show()
                         updateUI(true)
                     } else {
