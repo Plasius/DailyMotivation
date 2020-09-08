@@ -64,25 +64,26 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //USE WITH WORKING REST API SERVER
-        apiClient.getApiService().login(LoginRequest(email = email, password = password))
+        apiClient.getApiService().login(LoginRequest(email, password))
             .enqueue(object : Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     // Error logging in
                 }
 
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                    val loginResponse = response.body()
+                    Toast.makeText(baseContext, "Ding", Toast.LENGTH_LONG).show()
+                   /* val loginResponse = response.body()
 
                     if (loginResponse?.status == "success" ) {
                         //if success on register, start login
                         login(null)
                     } else {
                         // Error logging in
-                    }
+                    }*/
                 }
             })
 
-        updateUI(true)
+
     }
 
     fun login(view: View?) {
@@ -106,14 +107,13 @@ class LoginActivity : AppCompatActivity() {
 
                     if (loginResponse?.status == "success") {
                         sessionManager.saveAuthToken(loginResponse.auth_token)
-
+                        updateUI(true)
                     } else {
                         // Error logging in
                     }
                 }
             })
 
-        updateUI(true)
     }
 
 
