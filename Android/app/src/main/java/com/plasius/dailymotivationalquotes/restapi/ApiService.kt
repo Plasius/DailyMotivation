@@ -7,7 +7,6 @@ import retrofit2.http.*
 interface ApiService {
 
     @POST(Constants.LOGIN_URL)
-    @FormUrlEncoded
     fun login(@Body request: LoginRequest): Call<LoginResponse>
 
     @POST(Constants.REGISTER_URL)
