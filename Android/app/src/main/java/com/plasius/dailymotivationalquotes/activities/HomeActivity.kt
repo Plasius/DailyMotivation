@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.plasius.dailymotivationalquotes.R
 import com.plasius.dailymotivationalquotes.model.Message
+import com.plasius.dailymotivationalquotes.model.Quote
 import com.plasius.dailymotivationalquotes.restapi.ApiClient
 import com.plasius.dailymotivationalquotes.restapi.SessionManager
 import kotlinx.android.synthetic.main.activity_home.*
@@ -44,25 +45,25 @@ class HomeActivity : AppCompatActivity() {
         textGreeter.text = "$curGreet User!"
     }
 
-    private fun fetchMessage() {
+    private fun fetchQuote() {
 
         // Pass the token as parameter
-        apiClient.getApiService().fetchMessage("Bearer ${sessionManager.fetchAuthToken()}")
-            .enqueue(object : Callback<List<String>> {
-                override fun onFailure(call: Call<List<String>>, t: Throwable) {
+        apiClient.getApiService().fetchQuote(/*"Bearer ${sessionManager.fetchAuthToken()}"*/)
+            .enqueue(object : Callback<List<Quote>> {
+                override fun onFailure(call: Call<List<Quote>>, t: Throwable) {
                     // Error fetching posts
                 }
 
-                override fun onResponse(call: Call<List<String>>, response: Response<List<String>>
+                override fun onResponse(call: Call<List<Quote>>, response: Response<List<Quote>>
                 ) {
                     // Handle function to display posts
-                    Toast.makeText(baseContext, response.body().toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, response.body()!![0].text, Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
     private fun displayQuote(){
-        fetchMessage()
+        fetchQuote()
     }
 
     //checks if today's date has already been stored as local data
