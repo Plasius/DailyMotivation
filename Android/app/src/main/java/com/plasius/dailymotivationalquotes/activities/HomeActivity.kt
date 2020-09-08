@@ -114,11 +114,11 @@ class HomeActivity : AppCompatActivity() {
             val intent= Intent(this, UserSettingsActivity::class.java)
             startActivity(intent)
             return true
-        }else if(item?.getItemId() == R.id.fav){
+        }/*else if(item?.getItemId() == R.id.fav){
             val intent= Intent(this, FavoritesActivity::class.java)
             startActivity(intent)
             return true
-        }else if(item?.getItemId() == R.id.signout){
+        }*/else if(item?.getItemId() == R.id.signout){
             trigLogout()
             return true
         }else{
@@ -130,7 +130,7 @@ class HomeActivity : AppCompatActivity() {
     fun trigShare(view: View) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "Coming soon...")
+            putExtra(Intent.EXTRA_TEXT, textQuote.text)
             type = "text/plain"
         }
 
