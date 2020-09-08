@@ -8,10 +8,15 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.plasius.dailymotivationalquotes.R
+import com.plasius.dailymotivationalquotes.model.LoginRequest
+import com.plasius.dailymotivationalquotes.model.LoginResponse
 import com.plasius.dailymotivationalquotes.restapi.ApiClient
 import com.plasius.dailymotivationalquotes.restapi.SessionManager
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_user_settings.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 import kotlin.time.days
 
@@ -37,8 +42,8 @@ class LoginActivity : AppCompatActivity() {
         sessionManager = SessionManager(this)
     }
 
-    fun updateUI(succes: Boolean){
-        if (succes){
+    private fun updateUI(success: Boolean){
+        if (success){
                 getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", GregorianCalendar.getInstance().get(GregorianCalendar.DATE)).apply()
 
                 val intent=Intent(this, HomeActivity::class.java)
@@ -49,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun trig_signup(view: View) {
+    fun register(view: View) {
         val email = et_email.text.toString()
         val password = et_password.text.toString()
 
@@ -59,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //USE WITH WORKING REST API SERVER
-        /*apiClient.getApiService().login(LoginRequest(email = "s@sample.com", password = "mypassword"))
+        apiClient.getApiService().login(LoginRequest(email = email, password = password))
             .enqueue(object : Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     // Error logging in
@@ -68,18 +73,19 @@ class LoginActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     val loginResponse = response.body()
 
-                    if (loginResponse?.statusCode == 200 && loginResponse.user != null) {
-                        sessionManager.saveAuthToken(loginResponse.authToken)
+                    if (loginResponse?.status == "success" ) {
+                        //if success on register, start login
+                        login(null)
                     } else {
                         // Error logging in
                     }
                 }
-            })*/
+            })
 
         updateUI(true)
     }
 
-    fun trig_signin(view: View) {
+    fun login(view: View?) {
         val email = et_email.text.toString()
         val password = et_password.text.toString()
 
@@ -89,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //USE WITH WORKING REST API SERVER
-        /*apiClient.getApiService().login(LoginRequest(email = "s@sample.com", password = "mypassword"))
+        apiClient.getApiService().login(LoginRequest(email = email, password = password))
             .enqueue(object : Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     // Error logging in
@@ -98,20 +104,18 @@ class LoginActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     val loginResponse = response.body()
 
-                    if (loginResponse?.statusCode == 200 && loginResponse.user != null) {
-                        sessionManager.saveAuthToken(loginResponse.authToken)
+                    if (loginResponse?.status == "success") {
+                        sessionManager.saveAuthToken(loginResponse.auth_token)
+
                     } else {
                         // Error logging in
                     }
                 }
-            })*/
+            })
 
         updateUI(true)
     }
 
-    fun googleSign(view: View) {
-
-    }
 
     fun resPass(view: View) {
         val emailAddress = et_email.text.toString()
