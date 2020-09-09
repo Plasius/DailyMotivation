@@ -14,6 +14,6 @@ interface ApiService {
 
     @GET(Constants.QUOTES_URL)
     //fun fetchQuote(@Header("Authorization") token: String): Call<List<Quote>>
-    fun fetchQuote(): Call<List<Quote>>
+    fun fetchQuote(@Path("id") id: Int): Call<Quote>
 
 }

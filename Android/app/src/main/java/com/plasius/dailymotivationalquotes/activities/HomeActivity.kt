@@ -58,16 +58,16 @@ class HomeActivity : AppCompatActivity() {
     private fun fetchQuote() {
 
         // Pass the token as parameter
-        apiClient.getApiService().fetchQuote(/*"Bearer ${sessionManager.fetchAuthToken()}"*/)
-            .enqueue(object : Callback<List<Quote>> {
-                override fun onFailure(call: Call<List<Quote>>, t: Throwable) {
+        apiClient.getApiService().fetchQuote(1/*"Bearer ${sessionManager.fetchAuthToken()}"*/)
+            .enqueue(object : Callback<Quote> {
+                override fun onFailure(call: Call<Quote>, t: Throwable) {
                     // Error fetching posts
                 }
 
-                override fun onResponse(call: Call<List<Quote>>, response: Response<List<Quote>>
+                override fun onResponse(call: Call<Quote>, response: Response<Quote>
                 ) {
                     // Handle function to display posts
-                    Toast.makeText(baseContext, response.body()!![0].text, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, response.body()!!.text, Toast.LENGTH_SHORT).show()
                 }
             })
     }
