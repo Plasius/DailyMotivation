@@ -2,6 +2,7 @@ package com.plasius.dailymotivationalquotes.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -57,8 +58,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun fetchQuote() {
 
+        val randomId = 1
         // Pass the token as parameter
-        apiClient.getApiService().fetchQuote(1/*"Bearer ${sessionManager.fetchAuthToken()}"*/)
+        apiClient.getApiService().fetchQuote(randomId/*"Bearer ${sessionManager.fetchAuthToken()}"*/)
             .enqueue(object : Callback<Quote> {
                 override fun onFailure(call: Call<Quote>, t: Throwable) {
                     // Error fetching posts
@@ -67,12 +69,22 @@ class HomeActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<Quote>, response: Response<Quote>
                 ) {
                     // Handle function to display posts
-                    Toast.makeText(baseContext, response.body()!!.text, Toast.LENGTH_SHORT).show()
+                    textQuote.text = response.body()!!.text
+                    getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putString("Quote", response.body()!!.text).apply()
+
+                    getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastFetch", GregorianCalendar.getInstance().get(GregorianCalendar.DATE)).apply()
+
+                    //Toast.makeText(baseContext, response.body()!!.text, Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
     private fun displayQuote(){
+        if(wasActiveToday()){
+            textQuote.text = getSharedPreferences("localdata", Context.MODE_PRIVATE).getString("Quote", "")
+            return
+        }
+
         fetchQuote()
     }
 
@@ -80,7 +92,7 @@ class HomeActivity : AppCompatActivity() {
     private fun wasActiveToday():Boolean{
         val calendar = GregorianCalendar.getInstance()
         val today = calendar.get(GregorianCalendar.DATE)
-        val lastDay = getSharedPreferences("localdata", Context.MODE_PRIVATE).getInt("lastDay", -1)
+        val lastDay = getSharedPreferences("localdata", Context.MODE_PRIVATE).getInt("lastFetch", -1)
 
         return lastDay == today
     }
