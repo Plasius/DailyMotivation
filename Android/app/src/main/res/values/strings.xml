@@ -21,9 +21,13 @@
     <string name="email_new">new email...</string>
     <string name="email_set">Set new email</string>
 
+    <string name="firstname">first name</string>
+    <string name="lastname">last name</string>
+    
     <!-- USERNAME -->
     <string name="username_changed">Changed username to: </string>
     <string name="username_invalid">Not a valid username</string>
+    <string name="username_lwr">username</string>
     <string name="username_new">new username...</string>
     <string name="username_set">Set username</string>
 
