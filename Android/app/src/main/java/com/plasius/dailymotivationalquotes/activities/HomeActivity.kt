@@ -66,8 +66,7 @@ class HomeActivity : AppCompatActivity() {
                     // Error fetching posts
                 }
 
-                override fun onResponse(call: Call<Quote>, response: Response<Quote>
-                ) {
+                override fun onResponse(call: Call<Quote>, response: Response<Quote>) {
                     // Handle function to display posts
                     textQuote.text = response.body()!!.text
                     getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putString("Quote", response.body()!!.text).apply()

@@ -7,13 +7,19 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.plasius.dailymotivationalquotes.R
+import com.plasius.dailymotivationalquotes.model.Quote
+import com.plasius.dailymotivationalquotes.restapi.ApiClient
 import kotlinx.android.synthetic.main.activity_user_settings.*
 import com.plasius.dailymotivationalquotes.restapi.SessionManager
+import kotlinx.android.synthetic.main.activity_home.*
+import retrofit2.*
+import java.util.*
 
 class UserSettingsActivity : AppCompatActivity() {
-
+    private lateinit var apiClient: ApiClient
     private lateinit var sessionManager: SessionManager
 
 
@@ -22,7 +28,7 @@ class UserSettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user_settings)
 
         sessionManager = SessionManager(this)
-
+        apiClient = ApiClient()
     }
 
 
@@ -51,6 +57,18 @@ class UserSettingsActivity : AppCompatActivity() {
             .setPositiveButton(R.string.user_delete,
                 DialogInterface.OnClickListener { dialog, id ->
                     //delete user here TODO
+                    apiClient.getApiService().deleteUser("Bearer ${sessionManager.fetchAuthToken()}")
+                        .enqueue(object : Callback<String> {
+                            override fun onFailure(call: Call<String>, t: Throwable) {
+                                // Error fetching posts
+                            }
+
+                            override fun onResponse(call: Call<String>, response: Response<String>) {
+                                if(response.body()!! == "success"){
+                                    Toast.makeText(baseContext, response.body()!!, Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        } );
                 })
             .setNegativeButton(R.string.cancel,
                 DialogInterface.OnClickListener { dialog, id ->
