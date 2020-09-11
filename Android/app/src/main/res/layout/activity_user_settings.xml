@@ -25,7 +25,7 @@
         />
 
     <EditText
-        android:id="@+id/nMail"
+        android:id="@+id/settings_et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
@@ -34,19 +34,22 @@
         />
 
     <Button
+        android:tag="email"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:text="@string/email_set"
         android:layout_marginBottom="15dp"
         android:background="@color/orange_light"
-        android:onClick="trigUpdateMail"
+        android:onClick="onUpdateClicked"
+        android:padding="15dp"
+        android:layout_gravity="center_horizontal"
 
 
         />
 
 
     <EditText
-        android:id="@+id/nUsername"
+        android:id="@+id/settings_et_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
@@ -56,16 +59,19 @@
 
     <Button
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:text="@string/username_set"
         android:layout_marginBottom="15dp"
         android:background="@color/orange_light"
-        android:onClick="trigUpdateUser"
+        android:onClick="onUpdateClicked"
+        android:padding="15dp"
+        android:layout_gravity="center_horizontal"
+        android:tag="username"
         />
 
 
     <EditText
-        android:id="@+id/nPass"
+        android:id="@+id/settings_et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -74,13 +80,15 @@
         />
 
     <Button
+        android:tag="password"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:padding="15dp"
+        android:layout_gravity="center_horizontal"
         android:text="@string/password_reset"
-        android:layout_marginBottom="60dp"
         android:background="@color/orange_light"
-        android:onClick="trigUpdatePass"
-
+        android:onClick="onUpdateClicked"
+        android:layout_marginBottom="60dp"
         />
 
     <Button
@@ -89,7 +97,7 @@
         android:text="@string/rate"
         android:background="@color/orange_light"
         android:layout_marginBottom="15dp"
-        android:onClick="trigRate" />
+        android:onClick="onRateClicked" />
 
     <Button
         android:layout_height="wrap_content"
@@ -97,25 +105,36 @@
         android:text="@string/feedback"
         android:background="@color/orange_light"
         android:layout_marginBottom="15dp"
-        android:onClick="trigFeedback" />
+        android:onClick="onFeedbackClicked" />
 
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="@string/user_delete"
-        android:layout_marginBottom="15dp"
-        android:background="@color/orange_light"
-        android:onClick="trigDelete"
-        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="@string/sign_out"
-        android:layout_marginBottom="15dp"
-        android:background="@color/orange_light"
-        android:onClick="trigLogout"
-        />
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/user_delete"
+            android:layout_margin="15dp"
+            android:background="@color/orange_light"
+            android:onClick="onDeleteClicker"
+            android:padding="15dp"
+            />
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Logout"
+            android:padding="15dp"
+            android:layout_margin="15dp"
+            android:background="@color/orange_light"
+            android:onClick="onLogoutClicked"
+            />
+
+    </LinearLayout>
+
 
 </LinearLayout>
 

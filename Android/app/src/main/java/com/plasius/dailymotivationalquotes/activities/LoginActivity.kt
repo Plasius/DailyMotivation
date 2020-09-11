@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    fun login(view: View?) {
+    fun login(view: View) {
         var email = et_email.text.toString()
         var password = et_password.text.toString()
 

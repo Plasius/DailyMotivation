@@ -18,6 +18,7 @@ import com.plasius.dailymotivationalquotes.R
 import kotlinx.android.synthetic.main.activity_user_settings.*
 import kotlinx.android.synthetic.main.auxact_update_email.*
 import com.plasius.dailymotivationalquotes.R.string
+import com.plasius.dailymotivationalquotes.model.User
 import com.plasius.dailymotivationalquotes.restapi.SessionManager
 
 class UserSettingsActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class UserSettingsActivity : AppCompatActivity() {
     }
 
 
-    fun trigFeedback(view: View) {
+    fun onFeedbackClicked(view: View) {
         val email = arrayOf("supp.plotberry@gmail.com")
         val subject = "DMQ - Feedback"
         val message = ""
@@ -96,31 +97,25 @@ class UserSettingsActivity : AppCompatActivity() {
     }
 
     fun trigUpdateUser(view: View) {
-        val username = nUsername.text.toString()
+        val username = settings_et_username.text.toString()
 
     }
 
-    fun updatePass(){
+    fun onUpdateClicked(view: View){
+        //get user data, update necessary data, send to server
+        val user = sessionManager.fetchUser()
 
+        if(view.tag=="email"){
+            user?.email = settings_et_email.text.toString();
+        }else if(view.tag=="username"){
+            user?.username = settings_et_username.text.toString();
+        }else{ //password
+            user?.password = settings_et_password.text.toString();
+        }
     }
 
-    fun trigUpdatePass(view: View) {
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage("Change password?")
-            .setPositiveButton(R.string.save,
-                DialogInterface.OnClickListener { dialog, id ->
-                    updatePass()
-                })
-            .setNegativeButton(R.string.cancel,
-                DialogInterface.OnClickListener { dialog, id ->
-                    // User cancelled the dialog
-                })
-        // Create the AlertDialog object and return it
-        builder.create().show()
 
-    }
-
-    fun trigLogout(view: View) {
+    fun onLogoutClicked(view: View) {
         getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", 0).apply()
         sessionManager.saveAuthToken("")
 
@@ -129,7 +124,7 @@ class UserSettingsActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun trigRate(view: View) {
+    fun onRateClicked(view: View) {
         val sendIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.plasius.dailymotivationalquotes"))
         startActivity(sendIntent)
     }
