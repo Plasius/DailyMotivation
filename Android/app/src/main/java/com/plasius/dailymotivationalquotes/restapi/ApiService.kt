@@ -16,7 +16,6 @@ interface ApiService {
     //fun fetchQuote(@Header("Authorization") token: String): Call<List<Quote>>
     fun fetchQuote(@Path("id") id: Int): Call<Quote>
 
-    @POST(Constants.DELETE_USER_URL)
-    fun deleteUser(@Header("Authorization") token: String): Call<String>
-
+    @GET(Constants.VALIDATION_URL)
+    fun validateToken(@Header("Authorization") token : String) : Call<Int>
 }
