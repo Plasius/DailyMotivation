@@ -23,35 +23,23 @@
         android:layout_height="wrap_content"
         android:hint="@string/email_lwr"
         android:inputType="textEmailAddress"
-        />
+        android:autofillHints="AUTOFILL_HINT_EMAIL_ADDRESS" />
 
     <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password_lwr"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:autofillHints="AUTOFILL_HINT_NEW_PASSWORD" />
 
     <EditText
         android:id="@+id/et_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/username_lwr"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/et_firstname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/firstname"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/et_lastname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/lastname"
-        android:inputType="text" />
+        android:inputType="text"
+        android:autofillHints="AUTOFILL_HINT_NEW_USERNAME" />
 
     <Button
         android:id="@+id/su_button"
