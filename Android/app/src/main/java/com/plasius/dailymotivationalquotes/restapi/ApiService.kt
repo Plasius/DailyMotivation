@@ -12,6 +12,9 @@ interface ApiService {
     @POST(Constants.REGISTER_URL)
     fun register(@Body request: RegisterRequest): Call<RegisterResponse>
 
+    @POST(Constants.DELETE_USER_ULR)
+    fun deleteUser(@Header("Authorization") token:String): Call<String>
+
     @GET(Constants.QUOTES_URL)
     //fun fetchQuote(@Header("Authorization") token: String): Call<List<Quote>>
     fun fetchQuote(@Path("id") id: Int): Call<Quote>

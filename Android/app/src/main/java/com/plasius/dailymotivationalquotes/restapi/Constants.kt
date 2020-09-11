@@ -9,4 +9,5 @@ object Constants {
     //const val QUOTES_URL = "/quotes"
     const val QUOTES_URL = "/quotes/{id}"
     const val VALIDATION_URL = "/validate"
+    const val DELETE_USER_ULR = "/delete"
 }
