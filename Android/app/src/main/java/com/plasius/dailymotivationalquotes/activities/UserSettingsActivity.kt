@@ -105,6 +105,12 @@ class UserSettingsActivity : AppCompatActivity() {
         //get user data, update necessary data, send to server
         val user = sessionManager.fetchUser()
 
+        if(user == null)
+            onLogoutClicked(null);
+
+        //validate token
+
+        //validate input
         if(view.tag=="email"){
             user?.email = settings_et_email.text.toString();
         }else if(view.tag=="username"){
@@ -112,10 +118,16 @@ class UserSettingsActivity : AppCompatActivity() {
         }else{ //password
             user?.password = settings_et_password.text.toString();
         }
+
+        //send to server
+
+        //if successful, save
+
+
     }
 
 
-    fun onLogoutClicked(view: View) {
+    fun onLogoutClicked(view: View?) {
         getSharedPreferences("localdata", Context.MODE_PRIVATE).edit().putInt("lastDay", 0).apply()
         sessionManager.saveAuthToken("")
 
