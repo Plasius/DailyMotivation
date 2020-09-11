@@ -30,7 +30,6 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-
         apiClient = ApiClient()
         sessionManager = SessionManager(this)
 
@@ -56,6 +55,8 @@ class HomeActivity : AppCompatActivity() {
         textGreeter.text = "$curGreet $name!"
     }
 
+
+    //QUOTE DISPAY
     private fun fetchQuote() {
 
         val randomId = 1
@@ -97,18 +98,9 @@ class HomeActivity : AppCompatActivity() {
         return lastDay == today
     }
 
-    //retrieves all quotes based on locale from the Firebase Realtime database
-    private fun fetchAllQuotes(locale:String="en"){
-
-    }
-
-    //retrieves the user-specific id-list of accessed quotes
-    private fun fetchUserQuotes(){
-
-    }
 
 
-
+    //ANDROID LIFECYCLE
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.home_menu, menu)
@@ -120,13 +112,7 @@ class HomeActivity : AppCompatActivity() {
             val intent= Intent(this, UserSettingsActivity::class.java)
             startActivity(intent)
             return true
-        }/*else if(item?.getItemId() == R.id.fav){
-            val intent= Intent(this, FavoritesActivity::class.java)
-            startActivity(intent)
-            return true
-        }else if(item?.getItemId() == R.id.signout){
-            trigLogout()
-            return true}*/
+        }
         else{
            return super.onOptionsItemSelected(item!!)
         }
