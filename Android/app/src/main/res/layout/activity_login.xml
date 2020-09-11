@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/email_lwr"
         android:inputType="textEmailAddress"
+        android:autofillHints="AUTOFILL_HINT_EMAIL_ADDRESS"
         />
 
     <EditText
@@ -29,7 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password_lwr"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:autofillHints="AUTOFILL_HINT_PASSWORD"/>
 
     <Button
         android:layout_width="wrap_content"

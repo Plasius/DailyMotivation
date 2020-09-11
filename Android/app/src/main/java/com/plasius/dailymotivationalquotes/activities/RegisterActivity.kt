@@ -88,8 +88,7 @@ class RegisterActivity : AppCompatActivity() {
         var email = et_email.text.toString()
         var password = et_password.text.toString()
         var username = et_username.text.toString()
-        var firstName = et_firstname.text.toString()
-        var lastName = et_lastname.text.toString()
+
 
         if(email == "" || password == "" || username == ""){
             email = "aaa@gg.com"
@@ -100,7 +99,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
-        apiClient.getApiService().register(RegisterRequest(email, password, username, firstName, lastName))
+        apiClient.getApiService().register(RegisterRequest(email, password, username, "", ""))
             .enqueue(object : Callback<RegisterResponse> {
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                     // Error logging in
