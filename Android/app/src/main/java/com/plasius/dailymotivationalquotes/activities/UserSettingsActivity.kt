@@ -1,24 +1,15 @@
 package com.plasius.dailymotivationalquotes.activities
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.icu.text.Transliterator.getDisplayName
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
 import com.plasius.dailymotivationalquotes.R
 import kotlinx.android.synthetic.main.activity_user_settings.*
-import kotlinx.android.synthetic.main.auxact_update_email.*
-import com.plasius.dailymotivationalquotes.R.string
-import com.plasius.dailymotivationalquotes.model.User
 import com.plasius.dailymotivationalquotes.restapi.SessionManager
 
 class UserSettingsActivity : AppCompatActivity() {
@@ -53,17 +44,13 @@ class UserSettingsActivity : AppCompatActivity() {
 
     }
 
-    fun deleteUser(){
-
-    }
-
-    fun trigDelete(view: View) {
+    fun onDeleteClicked(view: View) {
 
         val builder = AlertDialog.Builder(this)
         builder.setMessage(R.string.user_delete)
             .setPositiveButton(R.string.user_delete,
                 DialogInterface.OnClickListener { dialog, id ->
-                    deleteUser()
+                    //delete user here TODO
                 })
             .setNegativeButton(R.string.cancel,
                 DialogInterface.OnClickListener { dialog, id ->
@@ -71,35 +58,8 @@ class UserSettingsActivity : AppCompatActivity() {
                 })
         // Create the AlertDialog object and return it
         builder.create().show()
-
-
     }
 
-    fun updateMail(){
-
-    }
-
-    fun trigUpdateMail(view: View) {
-
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage(R.string.email_change)
-            .setPositiveButton(R.string.save,
-                DialogInterface.OnClickListener { dialog, id ->
-                    updateMail()
-                })
-            .setNegativeButton(R.string.cancel,
-                DialogInterface.OnClickListener { dialog, id ->
-                    // User cancelled the dialog
-                })
-        // Create the AlertDialog object and return it
-        builder.create().show()
-
-    }
-
-    fun trigUpdateUser(view: View) {
-        val username = settings_et_username.text.toString()
-
-    }
 
     fun onUpdateClicked(view: View){
         //get user data, update necessary data, send to server
