@@ -16,4 +16,6 @@ interface ApiService {
     //fun fetchQuote(@Header("Authorization") token: String): Call<List<Quote>>
     fun fetchQuote(@Path("id") id: Int): Call<Quote>
 
+    @GET(Constants.VALIDATION_URL)
+    fun validateToken(@Header("Authorization") token : String) : Call<Int>
 }

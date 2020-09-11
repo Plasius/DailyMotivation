@@ -8,12 +8,10 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.plasius.dailymotivationalquotes.R
-import com.plasius.dailymotivationalquotes.model.LoginRequest
-import com.plasius.dailymotivationalquotes.model.LoginResponse
-import com.plasius.dailymotivationalquotes.model.RegisterRequest
-import com.plasius.dailymotivationalquotes.model.RegisterResponse
+import com.plasius.dailymotivationalquotes.model.*
 import com.plasius.dailymotivationalquotes.restapi.ApiClient
 import com.plasius.dailymotivationalquotes.restapi.SessionManager
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_user_settings.*
 import retrofit2.Call
@@ -31,17 +29,27 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val lastLogin = getSharedPreferences("localdata", Context.MODE_PRIVATE).getInt("lastDay", -1)
-        val today = GregorianCalendar.getInstance().get(GregorianCalendar.DATE)
-
-        if(today - lastLogin < 5){
-            updateUI(true)
-        }
-
-        setContentView(R.layout.activity_login)
 
         apiClient = ApiClient()
         sessionManager = SessionManager(this)
+
+        //check if token works, if so, update UI
+        apiClient.getApiService().validateToken("Bearer ${sessionManager.fetchAuthToken()}")
+            .enqueue(object : Callback<Int> {
+                override fun onFailure(call: Call<Int>, t: Throwable) {
+                    // Error fetching posts
+                }
+
+                override fun onResponse(call: Call<Int>, response: Response<Int>
+                ) {
+                    // if token is valid
+                    if(response.body() == 1)
+                        updateUI(true);
+                }
+            })
+
+        setContentView(R.layout.activity_login)
+
     }
 
     private fun updateUI(success: Boolean){
