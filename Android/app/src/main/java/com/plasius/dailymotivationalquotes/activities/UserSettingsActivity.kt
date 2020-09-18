@@ -6,12 +6,14 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.plasius.dailymotivationalquotes.R
 import com.plasius.dailymotivationalquotes.model.Quote
 import com.plasius.dailymotivationalquotes.restapi.ApiClient
+import com.plasius.dailymotivationalquotes.model.Stringify
 import kotlinx.android.synthetic.main.activity_user_settings.*
 import com.plasius.dailymotivationalquotes.restapi.SessionManager
 import kotlinx.android.synthetic.main.activity_home.*
@@ -91,10 +93,57 @@ class UserSettingsActivity : AppCompatActivity() {
         //validate input
         if(view.tag=="email"){
             user?.email = settings_et_email.text.toString();
+            val json = Stringify("email", settings_et_email.text.toString())
+            Toast.makeText(baseContext, json.getJson(), Toast.LENGTH_LONG).show()
+
+            apiClient.getApiService().updateUser(user!!.userId,"Bearer ${sessionManager.fetchAuthToken()}", json.getJson()).enqueue(object : Callback<String>{
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    // Error fetching posts
+                }
+
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if(response.body()!! == "success"){
+                        Toast.makeText(baseContext, response.body()!!, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            });
         }else if(view.tag=="username"){
             user?.username = settings_et_username.text.toString();
+
+            val json = Stringify("username", settings_et_username.text.toString())
+            Toast.makeText(baseContext, json.getJson(), Toast.LENGTH_LONG).show()
+
+            apiClient.getApiService().updateUser(user!!.userId,"Bearer ${sessionManager.fetchAuthToken()}", json.getJson()).enqueue(object : Callback<String>{
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    // Error fetching posts
+                }
+
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    Log.e("API", "3 - Response: ${response.body().toString()}")
+                    if(response.body()!! == "success"){
+                        Toast.makeText(baseContext, response.body()!!, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            });
         }else{ //password
             user?.password = settings_et_password.text.toString();
+
+            val json = Stringify("password", settings_et_password.text.toString())
+            Toast.makeText(baseContext, json.getJson(), Toast.LENGTH_LONG).show()
+
+            val user = sessionManager.fetchUser()
+
+            apiClient.getApiService().updateUser(user!!.userId,"Bearer ${sessionManager.fetchAuthToken()}", json.getJson()).enqueue(object : Callback<String>{
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    // Error fetching posts
+                }
+
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if(response.body()!! == "success"){
+                        Toast.makeText(baseContext, response.body()!!, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            });
         }
 
         //send to server

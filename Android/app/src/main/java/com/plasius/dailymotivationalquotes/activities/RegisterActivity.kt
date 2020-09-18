@@ -73,7 +73,7 @@ class RegisterActivity : AppCompatActivity() {
                     val loginResponse = response.body()
 
                     if (loginResponse?.status == "success") {
-                        sessionManager.saveAuthToken(loginResponse.auth_token)
+                        sessionManager.saveAuthToken(loginResponse.authToken)
                         sessionManager.saveUser(loginResponse.user)
                         updateUI(true)
                     } else {

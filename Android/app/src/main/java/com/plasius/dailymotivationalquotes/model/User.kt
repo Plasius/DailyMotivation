@@ -3,7 +3,6 @@ package com.plasius.dailymotivationalquotes.model
 import com.google.gson.annotations.SerializedName
 
 data class User (
-
         @SerializedName("user_id")
         var userId : Long,
 

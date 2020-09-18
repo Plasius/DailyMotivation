@@ -33,18 +33,20 @@ class LoginActivity : AppCompatActivity() {
         apiClient = ApiClient()
         sessionManager = SessionManager(this)
 
+        Log.e("API","1")
         //check if token works, if so, update UI
         apiClient.getApiService().validateToken("Bearer ${sessionManager.fetchAuthToken()}")
-            .enqueue(object : Callback<Int> {
-                override fun onFailure(call: Call<Int>, t: Throwable) {
+            .enqueue(object : Callback<ValidateResponse> {
+                override fun onFailure(call: Call<ValidateResponse>, t: Throwable) {
                     // Error fetching posts
                 }
 
-                override fun onResponse(call: Call<Int>, response: Response<Int>
-                ) {
-                    // if token is valid
-                    if(response.body() == 1)
-                        updateUI(true);
+                override fun onResponse(call: Call<ValidateResponse>, response: Response<ValidateResponse>) {
+                    Log.e("API", "2 - Response: ${response.body().toString()}")
+                    if(response.body()?.status != null){
+                        sessionManager.saveUser(response.body()!!.user)
+                        updateUI(true)
+                    }
                 }
             })
 
@@ -93,9 +95,9 @@ class LoginActivity : AppCompatActivity() {
                     response: Response<LoginResponse>
                 ) {
                     val loginResponse = response.body()
-
-                    if (loginResponse?.status == "success") {
-                        sessionManager.saveAuthToken(loginResponse.auth_token)
+                    Log.e("API", "3 - Response: ${response.body().toString()}")
+                    if (loginResponse?.status == "success" && loginResponse.authToken != null) {
+                        sessionManager.saveAuthToken(loginResponse.authToken)
                         sessionManager.saveUser(loginResponse.user)
                         updateUI(true)
                     } else {

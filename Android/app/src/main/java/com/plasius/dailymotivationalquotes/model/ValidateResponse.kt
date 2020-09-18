@@ -2,12 +2,9 @@ package com.plasius.dailymotivationalquotes.model
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginResponse (
+data class ValidateResponse (
     @SerializedName("status")
-    var status: String,
-
-    @SerializedName("token")
-    var authToken: String,
+    val status : String,
 
     @SerializedName("user")
     var user: User

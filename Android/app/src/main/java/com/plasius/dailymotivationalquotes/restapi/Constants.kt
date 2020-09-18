@@ -8,6 +8,7 @@ object Constants {
     const val REGISTER_URL = "/register"
     //const val QUOTES_URL = "/quotes"
     const val QUOTES_URL = "/quotes/{id}"
-    const val VALIDATION_URL = "/validate"
+    const val VALIDATION_URL = "/users/current"
+    const val USES_URL = "/users/{id}"
     const val DELETE_USER_ULR = "/delete"
 }
