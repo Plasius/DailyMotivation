@@ -58,8 +58,8 @@ class HomeActivity : AppCompatActivity() {
 
     //QUOTE DISPAY
     private fun fetchQuote() {
+        val randomId = (1..59).random()
 
-        val randomId = 1
         // Pass the token as parameter
         apiClient.getApiService().fetchQuote(randomId/*"Bearer ${sessionManager.fetchAuthToken()}"*/)
             .enqueue(object : Callback<Quote> {
@@ -130,6 +130,11 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        greeter()
+    }
 
 
 }

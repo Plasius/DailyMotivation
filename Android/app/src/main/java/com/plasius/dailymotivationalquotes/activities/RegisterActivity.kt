@@ -4,17 +4,15 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.View
 import android.widget.Toast
 import com.plasius.dailymotivationalquotes.R
 import com.plasius.dailymotivationalquotes.model.LoginRequest
 import com.plasius.dailymotivationalquotes.model.LoginResponse
 import com.plasius.dailymotivationalquotes.model.RegisterRequest
-import com.plasius.dailymotivationalquotes.model.RegisterResponse
+import com.plasius.dailymotivationalquotes.model.StatusResponse
 import com.plasius.dailymotivationalquotes.restapi.ApiClient
 import com.plasius.dailymotivationalquotes.restapi.SessionManager
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.et_email
 import kotlinx.android.synthetic.main.activity_login.et_password
 import kotlinx.android.synthetic.main.activity_register.*
@@ -100,12 +98,12 @@ class RegisterActivity : AppCompatActivity() {
 
 
         apiClient.getApiService().register(RegisterRequest(email, password, username, "", ""))
-            .enqueue(object : Callback<RegisterResponse> {
-                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+            .enqueue(object : Callback<StatusResponse> {
+                override fun onFailure(call: Call<StatusResponse>, t: Throwable) {
                     // Error logging in
                 }
 
-                override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
+                override fun onResponse(call: Call<StatusResponse>, response: Response<StatusResponse>) {
 
                     val registerResponse = response.body()
 

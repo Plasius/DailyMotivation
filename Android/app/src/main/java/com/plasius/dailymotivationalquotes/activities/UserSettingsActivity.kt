@@ -11,14 +11,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.plasius.dailymotivationalquotes.R
-import com.plasius.dailymotivationalquotes.model.Quote
+import com.plasius.dailymotivationalquotes.model.PatchRequest
+import com.plasius.dailymotivationalquotes.model.StatusResponse
+import com.plasius.dailymotivationalquotes.model.ValidateResponse
 import com.plasius.dailymotivationalquotes.restapi.ApiClient
-import com.plasius.dailymotivationalquotes.model.Stringify
 import kotlinx.android.synthetic.main.activity_user_settings.*
 import com.plasius.dailymotivationalquotes.restapi.SessionManager
-import kotlinx.android.synthetic.main.activity_home.*
 import retrofit2.*
-import java.util.*
 
 class UserSettingsActivity : AppCompatActivity() {
     private lateinit var apiClient: ApiClient
@@ -53,21 +52,26 @@ class UserSettingsActivity : AppCompatActivity() {
     }
 
     fun onDeleteClicked(view: View) {
-
+        val user = sessionManager.fetchUser()
+        if(user== null)
+            return
         val builder = AlertDialog.Builder(this)
         builder.setMessage(R.string.user_delete)
             .setPositiveButton(R.string.user_delete,
                 DialogInterface.OnClickListener { dialog, id ->
-                    //delete user here TODO
-                    apiClient.getApiService().deleteUser("Bearer ${sessionManager.fetchAuthToken()}")
-                        .enqueue(object : Callback<String> {
-                            override fun onFailure(call: Call<String>, t: Throwable) {
+                    //delete user here
+                    apiClient.getApiService().deleteUser(user.userId,"Bearer ${sessionManager.fetchAuthToken()}")
+                        .enqueue(object : Callback<StatusResponse> {
+                            override fun onFailure(call: Call<StatusResponse>, t: Throwable) {
                                 // Error fetching posts
                             }
 
-                            override fun onResponse(call: Call<String>, response: Response<String>) {
-                                if(response.body()!! == "success"){
-                                    Toast.makeText(baseContext, response.body()!!, Toast.LENGTH_SHORT).show()
+                            override fun onResponse(call: Call<StatusResponse>, response: Response<StatusResponse>) {
+                                if(response.body()?.status == "success"){
+                                    Toast.makeText(baseContext, "Profile deleted.", Toast.LENGTH_SHORT).show()
+                                    onLogoutClicked(null)
+                                }else{
+                                    Toast.makeText(baseContext, "Failed to delete user.", Toast.LENGTH_SHORT).show()
                                 }
                             }
                         } );
@@ -85,71 +89,48 @@ class UserSettingsActivity : AppCompatActivity() {
         //get user data, update necessary data, send to server
         val user = sessionManager.fetchUser()
 
-        if(user == null)
+        if(user == null) {
             onLogoutClicked(null);
+            return
+        }
 
-        //validate token
+        val request = PatchRequest()
 
         //validate input
         if(view.tag=="email"){
-            user?.email = settings_et_email.text.toString();
-            val json = Stringify("email", settings_et_email.text.toString())
-            Toast.makeText(baseContext, json.getJson(), Toast.LENGTH_LONG).show()
-
-            apiClient.getApiService().updateUser(user!!.userId,"Bearer ${sessionManager.fetchAuthToken()}", json.getJson()).enqueue(object : Callback<String>{
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    // Error fetching posts
-                }
-
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    if(response.body()!! == "success"){
-                        Toast.makeText(baseContext, response.body()!!, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            });
+            request.email = settings_et_email.text.toString()
+            settings_et_email.text.clear()
         }else if(view.tag=="username"){
-            user?.username = settings_et_username.text.toString();
-
-            val json = Stringify("username", settings_et_username.text.toString())
-            Toast.makeText(baseContext, json.getJson(), Toast.LENGTH_LONG).show()
-
-            apiClient.getApiService().updateUser(user!!.userId,"Bearer ${sessionManager.fetchAuthToken()}", json.getJson()).enqueue(object : Callback<String>{
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    // Error fetching posts
-                }
-
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    Log.e("API", "3 - Response: ${response.body().toString()}")
-                    if(response.body()!! == "success"){
-                        Toast.makeText(baseContext, response.body()!!, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            });
-        }else{ //password
-            user?.password = settings_et_password.text.toString();
-
-            val json = Stringify("password", settings_et_password.text.toString())
-            Toast.makeText(baseContext, json.getJson(), Toast.LENGTH_LONG).show()
-
-            val user = sessionManager.fetchUser()
-
-            apiClient.getApiService().updateUser(user!!.userId,"Bearer ${sessionManager.fetchAuthToken()}", json.getJson()).enqueue(object : Callback<String>{
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    // Error fetching posts
-                }
-
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    if(response.body()!! == "success"){
-                        Toast.makeText(baseContext, response.body()!!, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            });
+            request.username = settings_et_username.text.toString()
+            settings_et_username.text.clear()
+        }else { //password
+            request.password = settings_et_password.text.toString()
+            settings_et_password.text.clear()
         }
 
-        //send to server
 
-        //if successful, save
+        apiClient.getApiService().updateUser(user.userId,"Bearer ${sessionManager.fetchAuthToken()}", request).enqueue(object : Callback<StatusResponse>{
+            override fun onFailure(call: Call<StatusResponse>, t: Throwable) {
+                // Error fetching posts
+            }
+            override fun onResponse(call: Call<StatusResponse>, response: Response<StatusResponse>) {
+                Toast.makeText(baseContext, response.body()?.status, Toast.LENGTH_SHORT).show()
+                apiClient.getApiService().validateToken("Bearer ${sessionManager.fetchAuthToken()}")
+                    .enqueue(object : Callback<ValidateResponse> {
+                        override fun onFailure(call: Call<ValidateResponse>, t: Throwable) {
+                            // Error fetching posts
+                        }
 
+                        override fun onResponse(call: Call<ValidateResponse>, response: Response<ValidateResponse>) {
+                            Log.e("API", "2 - Response: ${response.body().toString()}")
+                            if(response.body()?.status != null){
+                                sessionManager.saveUser(response.body()!!.user)
+                                finish()
+                            }
+                        }
+                    })
+            }
+        });
 
     }
 

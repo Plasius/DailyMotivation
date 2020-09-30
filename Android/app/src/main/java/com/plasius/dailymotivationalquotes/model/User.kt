@@ -1,10 +1,11 @@
 package com.plasius.dailymotivationalquotes.model
 
+import androidx.annotation.Nullable
 import com.google.gson.annotations.SerializedName
 
 data class User (
         @SerializedName("user_id")
-        var userId : Long,
+        var userId : Int,
 
         @SerializedName("email")
         var email: String,
@@ -17,8 +18,5 @@ data class User (
 
         @SerializedName("last_name")
         var lastName: String,
-
-        @SerializedName("password")
-        var password: String
 
 )

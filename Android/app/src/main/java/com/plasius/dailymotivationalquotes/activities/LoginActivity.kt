@@ -77,10 +77,8 @@ class LoginActivity : AppCompatActivity() {
         var password = et_password.text.toString()
 
         if(email == "" || password == ""){
-            email = "aaa@gg.com"
-            password = "12345678"
-            //updateUI(false)
-            //return
+            updateUI(false)
+            return
         }
 
         //USE WITH WORKING REST API SERVER
@@ -90,10 +88,7 @@ class LoginActivity : AppCompatActivity() {
                     // Error logging in
                 }
 
-                override fun onResponse(
-                    call: Call<LoginResponse>,
-                    response: Response<LoginResponse>
-                ) {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     val loginResponse = response.body()
                     Log.e("API", "3 - Response: ${response.body().toString()}")
                     if (loginResponse?.status == "success" && loginResponse.authToken != null) {
