@@ -42,20 +42,12 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }else{
-            Toast.makeText(baseContext, R.string.login_failed, Toast.LENGTH_SHORT).show()
+            Toast.makeText(baseContext, "Registration failed.", Toast.LENGTH_SHORT).show()
         }
     }
 
     fun login(email: String, password: String) {
-        var email = et_email.text.toString()
-        var password = et_password.text.toString()
 
-        if(email == "" || password == ""){
-            email = "aaa@gg.com"
-            password = "12345678"
-            //updateUI(false)
-            //return
-        }
 
         //USE WITH WORKING REST API SERVER
         apiClient.getApiService().login(LoginRequest(email, password))
@@ -83,17 +75,14 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun register(view: View) {
-        var email = et_email.text.toString()
-        var password = et_password.text.toString()
-        var username = et_username.text.toString()
+        val email = et_email.text.toString()
+        val password = et_password.text.toString()
+        val username = et_username.text.toString()
 
 
         if(email == "" || password == "" || username == ""){
-            email = "aaa@gg.com"
-            password = "12345678"
-            username = "admin"
-            //updateUI(false)
-            //return
+            updateUI(false)
+            return
         }
 
 
@@ -101,17 +90,24 @@ class RegisterActivity : AppCompatActivity() {
             .enqueue(object : Callback<StatusResponse> {
                 override fun onFailure(call: Call<StatusResponse>, t: Throwable) {
                     // Error logging in
+                    Toast.makeText(baseContext, "Registration failed.", Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onResponse(call: Call<StatusResponse>, response: Response<StatusResponse>) {
+                override fun onResponse(
+                    call: Call<StatusResponse>,
+                    response: Response<StatusResponse>
+                ) {
 
                     val registerResponse = response.body()
 
-                    if (registerResponse?.status == "success" ) {
+                    if (registerResponse?.status == "success") {
                         //if success on register, start login
+                        Toast.makeText(baseContext, "Successful registration.", Toast.LENGTH_SHORT).show()
                         login(email, password)
                     } else {
                         // Error logging in
+                        Toast.makeText(baseContext, "Registration failed.", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             })

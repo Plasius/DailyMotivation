@@ -86,17 +86,22 @@ class LoginActivity : AppCompatActivity() {
             .enqueue(object : Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     // Error logging in
+                    Toast.makeText(baseContext, "Error logging in.", Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
                     val loginResponse = response.body()
                     Log.e("API", "3 - Response: ${response.body().toString()}")
-                    if (loginResponse?.status == "success" && loginResponse.authToken != null) {
+                    if (loginResponse?.status == "success") {
                         sessionManager.saveAuthToken(loginResponse.authToken)
                         sessionManager.saveUser(loginResponse.user)
                         updateUI(true)
                     } else {
                         // Error logging in
+                        Toast.makeText(baseContext, "Error logging in.", Toast.LENGTH_SHORT).show()
                     }
                 }
             })
@@ -105,11 +110,6 @@ class LoginActivity : AppCompatActivity() {
 
 
     fun resPass(view: View) {
-        val emailAddress = et_email.text.toString()
-
-        if (emailAddress == "") {
-            updateUI(false)
-            return
-        }
+        register(view)
     }
 }

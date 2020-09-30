@@ -51,7 +51,7 @@
         android:layout_gravity="right"
         android:background="@android:color/transparent"
         android:backgroundTint="#00FFFFFF"
-        android:text="@string/password_forgot"
+        android:text="@string/sign_up"
         android:onClick="resPass"/>
 
     <LinearLayout
@@ -62,15 +62,6 @@
         android:layout_gravity="center"
         >
 
-        <Button
-            android:id="@+id/su_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@color/orange_light"
-            android:backgroundTintMode="add"
-            android:onClick="register"
-            android:text="@string/sign_up" />
 
         <Button
             android:id="@+id/si_button"
