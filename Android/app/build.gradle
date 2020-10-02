@@ -11,8 +11,8 @@ android {
         applicationId "com.plasius.dailymotivationalquotes"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 13
-        versionName "Oceanman"
+        versionCode 14
+        versionName "Superman"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
