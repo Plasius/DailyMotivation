@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Daily Motivation</string>
+    <string name="app_name">KenGuru</string>
     <string name="welcome">\"Greetings, user! I\'m happy to see you among us.\"</string>
     <string name="or">Or</string>
     <string name="settings">Settings</string>
