@@ -50,4 +50,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="something_wrong">Oops. Something went wrong.</string>
 
+    <!-- GREETINGS - use ~ as a delimiter  -->
+    <string name="greetings">Take control~Take charge~Master life~Create order~Become independent~Go all out~Walk the extra mile~Get hyped~Embrace chaos~Let go of limitations</string>
+
 </resources>

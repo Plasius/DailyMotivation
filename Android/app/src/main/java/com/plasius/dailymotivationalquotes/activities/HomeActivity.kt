@@ -35,8 +35,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun greeter(){
         // lol maybe this shouldn't be a separate function
-        val greet= arrayOf("Welcome", "Hi", "Greetings,", "Hello there, General", "I did not. Oh, hi")  //add memes
-        val curGreet = greet.random()
+        val greetings = R.string.greetings.toString().split('~')
+        val curGreet = greetings.random()
+
 
         val user = sessionManager.fetchUser()
         var name = "Guest"
