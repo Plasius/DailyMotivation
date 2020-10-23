@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun greeter(){
         // lol maybe this shouldn't be a separate function
-        val greetings = R.string.greetings.toString().split('~')
+        val greetings = getString(R.string.greetings).split('~')
         val curGreet = greetings.random()
 
 
